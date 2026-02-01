@@ -32,17 +32,28 @@ MOVEMENT_RPC_URL=https://testnet.movementnetwork.xyz/v1
 SOLANA_RPC_URL=https://api.devnet.solana.com
 ```
 
-### 3. Funding
-The relayer needs funds on both chains to execute transactions.
+### 3. Funding & Utilities
+The relayer needs funds on both chains to execute transactions. We provide scripts to manage this.
+
+**Check Balances:**
+View Native SOL, Wrapped SOL (WSOL), and MOVE balances.
+```bash
+npx ts-node scripts/check_balance.ts
+```
 
 **Fund Solana (WSOL):**
-The relayer uses Wrapped SOL (WSOL) for swaps.
+Wraps native SOL into WSOL for the relayer's token account (Required for MOV → SOL swaps).
+Edit `scripts/fund_relayer_wsol.ts` to set `WRAP_AMOUNT_SOL`.
 ```bash
 npm run fund:wsol
 ```
 
-**Fund Movement:**
-Use the Movement faucet or transfer MOVE tokens to the relayer address printed on startup.
+**Fund Movement (MOVE):**
+Requests MOVE from the testnet faucet.
+Edit `scripts/fund_relayer_move.ts` to set `AMOUNT_MOVE`.
+```bash
+npx ts-node scripts/fund_relayer_move.ts
+```
 
 ### 4. Running the Relayer
 ```bash
