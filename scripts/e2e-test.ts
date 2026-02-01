@@ -11,7 +11,20 @@ const RELAYER_URL = 'http://localhost:3003';
 
 // Test addresses (replace with actual test addresses)
 const TEST_MOVEMENT_ADDRESS = '0x485ca1c12b5dfa01c282b9c7ef09fdfebbf877ed729bf999ce61a8ec5c5e69bd';
-const TEST_SOLANA_ADDRESS = 'DptTWPhqFA8GcpdwddDHLz6ZAQje8mtprpUECkXPXTdE';
+// Use a real keypair for signature generation
+import { Keypair, PublicKey } from '@solana/web3.js';
+import * as anchor from '@coral-xyz/anchor';
+import { Program } from '@coral-xyz/anchor';
+import { Connection } from '@solana/web3.js';
+import idl from '../src/intent_swap.json';
+
+const connection = new Connection('https://devnet.helius-rpc.com/?api-key=7ceb6609-616a-4e84-ba92-5ee3d04eb5e7');
+const provider = new anchor.AnchorProvider(connection, new anchor.Wallet(Keypair.generate()), {});
+const program = new anchor.Program(idl as any, provider);
+
+const userKeypair = Keypair.generate();
+const TEST_SOLANA_ADDRESS = userKeypair.publicKey.toBase58();
+console.log(chalk.gray(`   Generated Test User: ${TEST_SOLANA_ADDRESS}`));
 
 async function generateSecretAndHashlock(): Promise<{ secret: string; hashlock: string }> {
     const secretBytes = randomBytes(32);
@@ -97,13 +110,115 @@ async function testMovementToSolana(): Promise<boolean> {
     console.log(chalk.gray(`   Hashlock: ${hashlock.slice(0, 20)}...`));
 
     try {
+        const now = Math.floor(Date.now() / 1000);
+        const buyAmount = '100000000';
+        const sellAmount = '10000000';
+
+        // Construct Intent Object (Must match RelayerCore logic)
+        const intent = {
+            maker: new PublicKey(TEST_SOLANA_ADDRESS),
+            sellToken: new PublicKey('11111111111111111111111111111111'),
+            buyToken: new PublicKey('11111111111111111111111111111111'),
+            sellAmount: new anchor.BN(buyAmount), // Sell SOL on Solana (User perspective: buyAmount logic is flipped in intent construction?)
+            // WAIT: Relayer constructs intent.sellAmount = buyAmountInt?
+            // "sellAmount: new anchor.BN(buyAmountInt)" in RelayerCore loop removed?
+            // Let's check RelayerCore logic from previous view...
+            // It constructed: sellAmount: new anchor.BN(buyAmountInt)
+            // So here we need to match what the Relayer expects OR what we send.
+            // The Relayer now uses the PASSED intent.
+
+            // Let's construct the Intent exactly as the contract expects it:
+            // Maker: User (TEST_SOLANA_ADDRESS)
+            // Sell Token: SOL (since User is selling SOL on Solana in the fill instruction context? No.)
+            // The Fill instruction is on Solana.
+            // Intent: Maker is User.
+            // Swap: Movement -> Solana.
+            // User acts as Maker on Solana via Relayer?
+            // No, User is Maker of the Intent.
+            // On Solana, User is providing the liquidity? No, Relayer is filling.
+            // Relayer calls fill(intent).
+            // Contract transfers from Taker (Relayer) to Maker (User).
+            // So User is RECEIVING on Solana.
+
+            startAmount: new anchor.BN(buyAmount),
+            endAmount: new anchor.BN(buyAmount),
+            startTime: new anchor.BN(now),
+            endTime: new anchor.BN(now + 3600), // 1 hour buffer matches relayer config
+            nonce: new anchor.BN(Date.now())
+        };
+
+        // Encode Intent
+        // Workaround: program.coder.types.encode can be flaky in scripts.
+        // We generate the instruction and extract the bytes.
+        // Anchor TS methods usually expect camelCase arguments for the instruction builder?
+        // Let's try passing the object. If it fails, we might need to conform to camelCase keys.
+        // Actually, for specific defined types, Anchor TS often maps them.
+
+        const dummySig = new Array(64).fill(0);
+
+        // We need to use camelCase for the arguments passed to the method builder if Anchor logic applies
+        const intentArgs = {
+            maker: intent.maker,
+            sellToken: intent.sellToken,
+            buyToken: intent.buyToken,
+            sellAmount: intent.sellAmount,
+            startAmount: intent.startAmount,
+            endAmount: intent.endAmount,
+            startTime: intent.startTime,
+            endTime: intent.endTime,
+            nonce: intent.nonce
+        };
+
+        // Create instruction to get serialized data
+        // Note: .accounts() is needed for full instruction build but for serialization of args it might check.
+        // We provide dummy accounts to satisfy the builder.
+        const txBuilder = program.methods.fill(intentArgs, dummySig) as any;
+
+        await txBuilder.accounts({
+            taker: userKeypair.publicKey,
+            maker: intent.maker,
+            takerTokenAccount: userKeypair.publicKey, // Dummy
+            makerTokenAccount: userKeypair.publicKey, // Dummy
+            tokenProgram: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
+            verifyCtx: { instructions: new PublicKey("Sysvar1nstructions1111111111111111111111111") }
+        });
+
+        const ix = await txBuilder.instruction();
+
+        // Instruction Data Layout: [Discriminator (8)] + [Intent (144)] + [Signature (64)]
+        // Intent size = 32*3 + 8*6 = 96 + 48 = 144 bytes.
+        const msg = ix.data.slice(8, 8 + 144);
+        console.log("Serialized Intent Length:", msg.length);
+
+        // Sign with User Keypair (Ed25519)
+        // Simple workaround if nacl import is complex in ts-node: use tweetnacl
+        const nacl = require('tweetnacl');
+        const signature = nacl.sign.detached(msg, userKeypair.secretKey);
+        const signatureHex = '0x' + Buffer.from(signature).toString('hex');
+
+        // We need to convert BigNumbers to strings for JSON payload
+        // RelayerCore expects keys like 'maker', 'sell_amount', etc.
+        const intentJson = {
+            maker: intent.maker.toBase58(),
+            sell_token: intent.sellToken.toBase58(),
+            buy_token: intent.buyToken.toBase58(),
+            sell_amount: intent.sellAmount.toString(),
+            start_amount: intent.startAmount.toString(),
+            end_amount: intent.endAmount.toString(),
+            start_time: intent.startTime.toString(),
+            end_time: intent.endTime.toString(),
+            nonce: intent.nonce.toString()
+        };
+
         const swapResponse = await axios.post(`${RELAYER_URL}/swap/movement-to-solana`, {
             makerAddress: TEST_MOVEMENT_ADDRESS,
             recipientAddress: TEST_SOLANA_ADDRESS,
-            sellAmount: '10000000',  // 0.1 MOVE in octas
-            buyAmount: '100000000',  // 0.1 SOL in lamports
+            sellAmount: sellAmount,
+            buyAmount: buyAmount,
             hashlock,
             sourceEscrowId: 0,
+            signature: signatureHex,
+            intent: intentJson
         });
 
         console.log(chalk.green('✅ Swap request submitted'));

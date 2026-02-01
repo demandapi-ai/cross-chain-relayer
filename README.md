@@ -1,87 +1,93 @@
-# Cross-Chain Relayer
+# Cross-Chain Relayer (Movement ↔ Solana)
 
-## Purpose
-The **Cross-Chain Relayer** is a dedicated service responsible for orchestrating atomic swaps between **Movement** and **Solana**. It acts as a trusted bridge facilitator for the current "Trusted Relayer" model (Movement -> Solana) and will eventually support fully trustless HTLC settlement.
+This package acts as the bridge between the **Movement** and **Solana** blockchains for the Intent Protocol. It listens for intent events, verifies signatures, and executes atomic swaps using HTLCs (Hash Time Locked Contracts).
 
-It listens for user intents (escrow locks) on one chain and automatically:
-1.  **Fills** the order effectively on the destination chain.
-2.  **Claims** the funds on the source chain once the user reveals the secret on the destination chain (completing the atomic swap).
+## 🚀 Features
+- **Atomic Swaps:** Secure cross-chain exchanges using HTLC.
+- **Bi-Directional:** Supports Movement → Solana and Solana → Movement.
+- **Relayer API:** REST API for submitting intentions and checking status.
+- **Automated Fulfillment:** Listens for events and auto-fills orders.
 
-## Architecture
-The relayer is built with **Fastify** and uses:
--   **Aptos SDK**: To interact with the Movement testnet.
--   **Solana Web3.js**: To interact with the Solana Devnet.
+## 🛠️ Setup
 
-It exposes a REST API for the frontend to submit intents and for the Relayer to report its health/liquidity status.
+### Prerequisites
+- Node.js v18+
+- Solana CLI
+- Aptos CLI (for Movement)
 
-## Interacting Contracts
+### 1. Installation
+```bash
+cd packages/cross-chain-relayer
+npm install
+```
 
-The Relayer interacts with the following Hash Time Locked Contract (HTLC) deployments:
+### 2. Configuration
+Create a `.env` file based on `.env.example`:
 
-| Chain | Network | Contract Name | Address / Program ID |
-| :--- | :--- | :--- | :--- |
-| **Movement** | Bardock Testnet | `htlc_escrow` | `0x485ca1c12b5dfa01c282b9c7ef09fdfebbf877ed729bf999ce61a8ec5c5e69bd` |
-| **Solana** | Devnet | `intent_swap` | `5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N` |
+```env
+PORT=3003
+RELAYER_PRIVATE_KEY=...    # Movement Private Key (0x...)
+SOLANA_PRIVATE_KEY=...     # Solana Private Key Array ([1,2,3...])
+MOVEMENT_RPC_URL=https://testnet.movementnetwork.xyz/v1
+SOLANA_RPC_URL=https://api.devnet.solana.com
+```
 
-## Installation & Setup
+### 3. Funding
+The relayer needs funds on both chains to execute transactions.
 
-1.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
+**Fund Solana (WSOL):**
+The relayer uses Wrapped SOL (WSOL) for swaps.
+```bash
+npm run fund:wsol
+```
 
-2.  **Environment Configuration**
-    Create a `.env` file in the root of this package:
-    ```env
-    # Movement (Aptos) Config
-    MOVEMENT_RPC_URL=https://testnet.movementnetwork.xyz/v1
-    MOVEMENT_PRIVATE_KEY=0x... # Relayer's private key (must be funded with MOVE)
-    MOVEMENT_HTLC_ADDRESS=0x485ca1c12b5dfa01c282b9c7ef09fdfebbf877ed729bf999ce61a8ec5c5e69bd
+**Fund Movement:**
+Use the Movement faucet or transfer MOVE tokens to the relayer address printed on startup.
 
-    # Solana Config
-    SOLANA_RPC_URL=https://api.devnet.solana.com
-    SOLANA_PRIVATE_KEY=...    # Base58 encoded private key (must be funded with SOL)
-    SOLANA_PROGRAM_ID=5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N
-    
-    # Server Port
-    PORT=3003
-    ```
+### 4. Running the Relayer
+```bash
+# Development
+npm run dev
 
-3.  **Run Locally (Development)**
-    ```bash
-    npm run dev
-    ```
+# Production
+npm run build
+npm start
+```
 
-4.  **Build & Run (Production)**
-    ```bash
-    npm run build
-    npm start
-    ```
+## 📚 API Endpoints
 
-## API Endpoints
+### Health Check
+`GET /health`
+Returns the status of the relayer and connected chains.
 
--   `GET /health`: Returns relayer balances and connection status.
--   `GET /orders`: Returns detailed history of active and completed swap intents.
--   `POST /swap/movement-to-solana`: Receives a request to lock MOVE on Movement (Frontend triggers this).
--   `POST /swap/solana-to-movement`: Receives a request to lock SOL on Solana.
--   `POST /reveal-secret`: Used to submit the secret for the `MOV -> SOL` flow (Trusted Mode claim).
+### Submit Swap (Movement → Solana)
+`POST /swap/movement-to-solana`
+```json
+{
+  "makerAddress": "0x...",
+  "recipientAddress": "SolanaAddress...",
+  "sellAmount": "100000000",
+  "buyAmount": "1000000000",
+  "hashlock": "0x...",
+  "signature": "..." 
+}
+```
 
-## Deployment
+### Submit Swap (Solana → Movement)
+`POST /swap/solana-to-movement`
+```json
+{
+  "makerAddress": "SolanaAddress...",
+  "recipientAddress": "0x...",
+  "sellAmount": "1000000000",
+  "buyAmount": "100000000",
+  "hashlock": "0x..."
+}
+```
 
-To deploy this service (e.g., to Railway, AWS, or a VPS):
+## 🧪 Testing
 
-1.  Ensure the environment variables are set in your deployment provider.
-2.  Use the `start` command (`npm start`).
-3.  Expose port `3003` (or the port defined in your env).
-
-### Docker Support (Optional)
-A standard Node.js Dockerfile can be used:
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-CMD ["npm", "start"]
+Run End-to-End tests:
+```bash
+npm run test:e2e
 ```

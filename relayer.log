@@ -1,0 +1,20 @@
+
+> cross-chain-relayer@0.1.0 start
+> node dist/src/index.js
+
+[Aptos SDK] It is recommended that private keys are AIP-80 compliant (https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-80.md). You can fix the private key by formatting it with `PrivateKey.formatPrivateKey(privateKey: string, type: 'ed25519' | 'secp256k1'): string`.
+🔷 Movement Service Initialized: 0x6315e315b46112eabebd4e168a929fbcc4d494f28b38c8ec9c97a6b80d5c8ee2
+✅ Loaded SOLANA_PRIVATE_KEY
+☀️ Solana Service Initialized: Crgx1n8HxZe8fq3d3vYhYrLDuKJ3pJZN4gfeSKuNarub
+🔗 Cross-Chain Relayer Core Initialized
+Failed to start server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3003
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at doListen (node:net:2139:7)
+    at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3003
+}

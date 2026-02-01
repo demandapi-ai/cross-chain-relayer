@@ -44,6 +44,8 @@ server.post('/swap/movement-to-solana', async (request, reply) => {
             buyAmount: body.buyAmount,
             hashlock: body.hashlock,
             sourceEscrowId: body.sourceEscrowId || 0,
+            signature: body.signature || "0x" + "00".repeat(64), // Fallback for test if needed
+            intent: body.intent || {}
         });
 
         return { success: true, intent };

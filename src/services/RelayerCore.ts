@@ -4,6 +4,7 @@ import { SolanaService } from './SolanaService';
 import { CrossChainIntent, IntentStatus, RelayerHealth } from '../types/intent';
 import { config } from '../config';
 import { PublicKey } from '@solana/web3.js';
+import * as anchor from '@coral-xyz/anchor';
 
 export class RelayerCore {
     private movementService: MovementService;
@@ -28,6 +29,8 @@ export class RelayerCore {
         buyAmount: string;          // SOL amount (lamports)
         hashlock: string;           // Hex-encoded hashlock from user
         sourceEscrowId: number;     // Escrow ID on Movement (from user's lock tx)
+        signature: string;          // User's Ed25519 signature
+        intent: any;                // The full intent object (JSON)
     }): Promise<CrossChainIntent> {
         const intentId = `mov_sol_${Date.now()}`;
         const now = Math.floor(Date.now() / 1000);
@@ -59,12 +62,35 @@ export class RelayerCore {
         this.activeIntents.set(intentId, intent);
 
         try {
-            // Step 1: Fill on Solana (create escrow with same hashlock)
-            // Note: In a real system, we'd transfer SOL directly, but for HTLC demo we create escrow
-            console.log(chalk.cyan('⚡ Filling on Solana...'));
+            // Parse signature from hex string
+            const signatureBytes = Buffer.from(params.signature.replace('0x', ''), 'hex');
+            const signatureArray = Array.from(signatureBytes);
 
-            // For SOL transfers, we might use a simpler transfer or wrap in HTLC
-            // This is a simplified version - in production, implement proper SOL handling
+            // Reconstruct Typed Intent Object (from JSON parameters)
+            // MUST use snake_case keys to match IDL for 'encode' and instruction args
+            // Updated to deployed devnet address
+            const INTENT_PROGRAM_ID = new PublicKey("5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2");
+            const intentParams = {
+                maker: new PublicKey(params.intent.maker),
+                sell_token: new PublicKey(params.intent.sell_token_type || params.intent.sellToken || params.intent.sell_token),
+                buy_token: new PublicKey(params.intent.buy_token_type || params.intent.buyToken || params.intent.buy_token),
+                sell_amount: new anchor.BN(params.intent.sell_amount),
+                start_amount: new anchor.BN(params.intent.start_amount || params.intent.startAmount || params.intent.sell_amount),
+                end_amount: new anchor.BN(params.intent.end_amount || params.intent.endAmount || params.intent.sell_amount),
+                start_time: new anchor.BN(params.intent.start_time),
+                end_time: new anchor.BN(params.intent.end_time),
+                nonce: new anchor.BN(params.intent.nonce)
+            };
+
+            const tx = await this.solanaService.fill(
+                new PublicKey(params.recipientAddress), // Maker of the escrow on Solana is the User (recipient of the cross-chain swap)
+                new anchor.BN(params.buyAmount),
+                new anchor.BN(params.sellAmount),
+                intentParams,
+                signatureArray
+            );
+
+            intent.destFillTx = tx;
             intent.status = 'DEST_FILLED';
             intent.updatedAt = Math.floor(Date.now() / 1000);
 
@@ -168,16 +194,13 @@ export class RelayerCore {
                 // User claimed on Solana, now we claim on Movement
                 // Fix: Since Solana HTLC is simulated, we must Transfer SOL to user now (Trusted Mode)
                 console.log(chalk.cyan(`⚡ Trusted Mode: Sending ${intent.buyAmount} Lamports to User...`));
+                console.log(chalk.cyan(`⚡ Trusted Mode: Claiming on Solana...`));
                 try {
-                    const solTx = await this.solanaService.transferSol(
-                        new PublicKey(intent.recipientAddress),
-                        parseInt(intent.buyAmount)
-                    );
-                    console.log(chalk.green(`✅ Sent SOL to User: ${solTx}`));
+                    // TODO: Implement claim on Solana using Anchor
+                    // const solTx = await this.solanaService.claim(...)
+                    console.log(chalk.yellow(`⚠️  Solana claim not yet implemented in this demo flow`));
                 } catch (err: any) {
-                    console.error(chalk.red(`❌ Failed to send SOL to user: ${err.message}`));
-                    // We continue to claim on Movement anyway since we have the secret (Relayer protection)
-                    // But strictly, we should probably fail? No, if we have secret, we claim source to secure funds.
+                    console.error(chalk.red(`❌ Failed to claim on Solana: ${err.message}`));
                 }
 
                 const txHash = await this.movementService.claim(

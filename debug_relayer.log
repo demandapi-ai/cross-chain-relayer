@@ -1,0 +1,709 @@
+[2026-01-31T03:23:14.483Z] Calling fill with intentParams: {"maker":"42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"4a14d8","start_amount":"4a14d8","end_amount":"4a14d8","start_time":"697d755d","end_time":"697d83a9","nonce":"019c12135e3a"}
+[2026-01-31T03:23:14.484Z] Signature len: 64
+[2026-01-31T03:23:14.485Z] Maker: 42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX
+[2026-01-31T03:23:15.318Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14549 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14549 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:165:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T03:23:15.318Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14549 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T03:27:38.701Z] Calling fill with intentParams: {"maker":"42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"4a2c48","start_amount":"4a2c48","end_amount":"4a2c48","start_time":"697d766c","end_time":"697d84b8","nonce":"019c121780a8"}
+[2026-01-31T03:27:38.702Z] Signature len: 64
+[2026-01-31T03:27:38.702Z] Maker: 42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX
+[2026-01-31T11:10:20.362Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"250478","start_amount":"250478","end_amount":"250478","start_time":"697de2de","end_time":"697df12a","nonce":"019c13bf1e0f"}
+[2026-01-31T11:10:20.392Z] Signature len: 0
+[2026-01-31T11:10:20.393Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:13:53.317Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"250880","start_amount":"250880","end_amount":"250880","start_time":"697de3b3","end_time":"697df1ff","nonce":"019c13c25dd2"}
+[2026-01-31T11:13:53.317Z] Signature len: 64
+[2026-01-31T11:13:53.317Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:17:34.492Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2524f0","start_amount":"2524f0","end_amount":"2524f0","start_time":"697de490","end_time":"697df2dc","nonce":"019c13c5bddd"}
+[2026-01-31T11:17:34.502Z] Signature len: 64
+[2026-01-31T11:17:34.503Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:24:15.519Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"252160","start_amount":"252160","end_amount":"252160","start_time":"697de621","end_time":"697df46d","nonce":"019c13cbdb5b"}
+[2026-01-31T11:24:15.521Z] Signature len: 64
+[2026-01-31T11:24:15.521Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:29:14.620Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25223f","start_amount":"25223f","end_amount":"25223f","start_time":"697de74c","end_time":"697df598","nonce":"019c13d06ced"}
+[2026-01-31T11:29:14.634Z] Signature len: 64
+[2026-01-31T11:29:14.635Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:29:16.685Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:170:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:29:16.686Z] Logs: 
+[2026-01-31T11:32:17.030Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2522d7","start_amount":"2522d7","end_amount":"2522d7","start_time":"697de802","end_time":"697df64e","nonce":"019c13d33601"}
+[2026-01-31T11:32:17.031Z] Signature len: 64
+[2026-01-31T11:32:17.031Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:32:18.367Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:170:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:32:18.368Z] Logs: 
+[2026-01-31T11:36:15.839Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25277a","start_amount":"25277a","end_amount":"25277a","start_time":"697de8f1","end_time":"697df73d","nonce":"019c13d6d91f"}
+[2026-01-31T11:36:15.852Z] Signature len: 64
+[2026-01-31T11:36:15.852Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:36:17.704Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:170:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:36:17.706Z] Logs: 
+[2026-01-31T11:43:36.977Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2527f1","start_amount":"2527f1","end_amount":"2527f1","start_time":"697deaaa","end_time":"697df8f6","nonce":"019c13dd9482"}
+[2026-01-31T11:43:36.991Z] Signature len: 64
+[2026-01-31T11:43:36.992Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:43:38.272Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:174:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:43:38.273Z] Logs: 
+[2026-01-31T11:50:31.041Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"251cc7","start_amount":"251cc7","end_amount":"251cc7","start_time":"697dec48","end_time":"697dfa94","nonce":"019c13e3e3f4"}
+[2026-01-31T11:50:31.055Z] Signature len: 64
+[2026-01-31T11:50:31.055Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:50:32.523Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:174:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:50:32.524Z] Logs: 
+[2026-01-31T11:56:39.265Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"250873","start_amount":"250873","end_amount":"250873","start_time":"697dedb9","end_time":"697dfc05","nonce":"019c13e985cd"}
+[2026-01-31T11:56:39.281Z] Signature len: 64
+[2026-01-31T11:56:39.281Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T11:56:40.750Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:174:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T11:56:40.751Z] Logs: 
+[2026-01-31T16:39:58.543Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25dc52","start_amount":"25dc52","end_amount":"25dc52","start_time":"697e3020","end_time":"697e3e6c","nonce":"019c14ece954"}
+[2026-01-31T16:39:58.577Z] Signature len: 64
+[2026-01-31T16:39:58.577Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T16:40:00.677Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:174:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T16:40:00.678Z] Logs: 
+[2026-01-31T16:46:04.620Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25e1cf","start_amount":"25e1cf","end_amount":"25e1cf","start_time":"697e318e","end_time":"697e3fda","nonce":"019c14f27da9"}
+[2026-01-31T16:46:04.644Z] Signature len: 64
+[2026-01-31T16:46:04.644Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T16:46:06.194Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:174:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T16:46:06.194Z] Logs: 
+[2026-01-31T16:49:14.270Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2641b2","start_amount":"2641b2","end_amount":"2641b2","start_time":"697e324c","end_time":"697e4098","nonce":"019c14f56379"}
+[2026-01-31T16:49:14.286Z] Signature len: 64
+[2026-01-31T16:49:14.286Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T16:49:15.642Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:182:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T16:49:15.643Z] Logs: 
+[2026-01-31T16:52:46.675Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"262fab","start_amount":"262fab","end_amount":"262fab","start_time":"697e3320","end_time":"697e416c","nonce":"019c14f8a12d"}
+[2026-01-31T16:52:46.676Z] Signature len: 64
+[2026-01-31T16:52:46.676Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T16:52:48.161Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:182:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T16:52:48.162Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T18:38:03.670Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"252360","start_amount":"252360","end_amount":"252360","start_time":"697e4bcd","end_time":"697e5a19","nonce":"019c15590489"}
+[2026-01-31T18:38:03.699Z] Signature len: 64
+[2026-01-31T18:38:03.699Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T18:38:05.362Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:172:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-01-31T18:38:05.525Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T18:47:02.407Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25df36","start_amount":"25df36","end_amount":"25df36","start_time":"697e4de8","end_time":"697e5c34","nonce":"019c15613caa"}
+[2026-01-31T18:47:02.455Z] Signature len: 64
+[2026-01-31T18:47:02.455Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T18:47:04.739Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:172:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-01-31T18:47:04.769Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T18:49:57.805Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25cc10","start_amount":"25cc10","end_amount":"25cc10","start_time":"697e4e97","end_time":"697e5ce3","nonce":"019c1563e9dd"}
+[2026-01-31T18:49:57.805Z] Signature len: 64
+[2026-01-31T18:49:57.805Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T18:49:59.795Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:172:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-01-31T18:49:59.795Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T18:51:51.451Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25f9f7","start_amount":"25f9f7","end_amount":"25f9f7","start_time":"697e4f09","end_time":"697e5d55","nonce":"019c1565a658"}
+[2026-01-31T18:51:51.452Z] Signature len: 64
+[2026-01-31T18:51:51.452Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T18:51:53.368Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:172:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-01-31T18:51:53.444Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T18:52:59.834Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2606f7","start_amount":"2606f7","end_amount":"2606f7","start_time":"697e4f4d","end_time":"697e5d99","nonce":"019c1566b26a"}
+[2026-01-31T18:52:59.835Z] Signature len: 64
+[2026-01-31T18:52:59.835Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T18:53:02.303Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1772. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:172:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-01-31T18:53:02.304Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program log: AnchorError thrown in src/dutch_auction.rs:25. Error Code: InvalidParameters. Error Number: 6002. Error Message: Invalid auction parameters.
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 14478 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1772
+[2026-01-31T19:36:20.531Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25a68c","start_amount":"25a68c","end_amount":"25a68c","start_time":"697e5975","end_time":"697e67c1","nonce":"019c158e5f4d"}
+[2026-01-31T19:36:20.570Z] Signature len: 64
+[2026-01-31T19:36:20.570Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T19:38:34.397Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25976a","start_amount":"25976a","end_amount":"25976a","start_time":"697e59fc","end_time":"697e6848","nonce":"019c15906b53"}
+[2026-01-31T19:38:34.398Z] Signature len: 64
+[2026-01-31T19:38:34.398Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:02:30.270Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25dda3","start_amount":"25dda3","end_amount":"25dda3","start_time":"697e5f97","end_time":"697e6de3","nonce":"019c15a653f7"}
+[2026-01-31T20:02:30.292Z] Signature len: 64
+[2026-01-31T20:02:30.292Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:06:13.995Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25f1a1","start_amount":"25f1a1","end_amount":"25f1a1","start_time":"697e6077","end_time":"697e6ec3","nonce":"019c15a9be63"}
+[2026-01-31T20:06:13.995Z] Signature len: 64
+[2026-01-31T20:06:13.995Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:07:44.735Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"38f073","start_amount":"38f073","end_amount":"38f073","start_time":"697e60d2","end_time":"697e6f1e","nonce":"019c15ab1f8a"}
+[2026-01-31T20:07:44.736Z] Signature len: 64
+[2026-01-31T20:07:44.736Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:07:48.096Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:199:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T20:07:48.098Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+Program log: Instruction: Transfer
+Program log: Error: insufficient funds
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1
+[2026-01-31T20:08:18.176Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25f59b","start_amount":"25f59b","end_amount":"25f59b","start_time":"697e60f3","end_time":"697e6f3f","nonce":"019c15aba1c4"}
+[2026-01-31T20:08:18.177Z] Signature len: 64
+[2026-01-31T20:08:18.177Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:08:19.388Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:199:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T20:08:19.388Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+Program log: Instruction: Transfer
+Program log: Error: insufficient funds
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1
+[2026-01-31T20:10:58.457Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25f37b","start_amount":"25f37b","end_amount":"25f37b","start_time":"697e6194","end_time":"697e6fe0","nonce":"019c15ae1546"}
+[2026-01-31T20:10:58.457Z] Signature len: 64
+[2026-01-31T20:10:58.457Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:10:59.739Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:199:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T20:10:59.740Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+Program log: Instruction: Transfer
+Program log: Error: insufficient funds
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1
+[2026-01-31T20:16:35.215Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25d2d7","start_amount":"25d2d7","end_amount":"25d2d7","start_time":"697e62e4","end_time":"697e7130","nonce":"019c15b338b7"}
+[2026-01-31T20:16:35.217Z] Signature len: 64
+[2026-01-31T20:16:35.217Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:16:37.088Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 1: custom program error: 0x1. 
+Logs: 
+[
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]",
+  "Program log: Instruction: Fill",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units",
+  "Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8208:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8173:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:8164:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/lib/index.cjs.js:2273:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/SolanaService.js:199:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/services/RelayerCore.js:105:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/dist/src/index.js:38:24)
+[2026-01-31T20:16:37.090Z] Logs: Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 invoke [1]
+Program log: Instruction: Fill
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]
+Program log: Instruction: Transfer
+Program log: Error: insufficient funds
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 187822 compute units
+Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 consumed 19480 of 203000 compute units
+Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program error: 0x1
+[2026-01-31T20:27:04.567Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"25ebc9","start_amount":"25ebc9","end_amount":"25ebc9","start_time":"697e6559","end_time":"697e73a5","nonce":"019c15bcd1db"}
+[2026-01-31T20:27:04.568Z] Signature len: 64
+[2026-01-31T20:27:04.568Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:35:00.038Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"260625","start_amount":"260625","end_amount":"260625","start_time":"697e6735","end_time":"697e7581","nonce":"019c15c4148e"}
+[2026-01-31T20:35:00.038Z] Signature len: 64
+[2026-01-31T20:35:00.038Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T20:36:42.220Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"260626","start_amount":"260626","end_amount":"260626","start_time":"697e679c","end_time":"697e75e8","nonce":"019c15c5a49f"}
+[2026-01-31T20:36:42.221Z] Signature len: 64
+[2026-01-31T20:36:42.221Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T21:04:04.202Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"261f85","start_amount":"261f85","end_amount":"261f85","start_time":"697e6e05","end_time":"697e7c51","nonce":"019c15deb027"}
+[2026-01-31T21:04:04.202Z] Signature len: 64
+[2026-01-31T21:04:04.202Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-01-31T21:53:20.141Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"266be2","start_amount":"266be2","end_amount":"266be2","start_time":"697e7990","end_time":"697e87dc","nonce":"019c160bc824"}
+[2026-01-31T21:53:20.157Z] Signature len: 64
+[2026-01-31T21:53:20.157Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T06:14:40.998Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"27b8d6","start_amount":"27b8d6","end_amount":"27b8d6","start_time":"697eef12","end_time":"697efd5e","nonce":"019c17d6ca5b"}
+[2026-02-01T06:14:41.009Z] Signature len: 64
+[2026-02-01T06:14:41.009Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C

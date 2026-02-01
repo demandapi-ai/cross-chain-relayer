@@ -1,0 +1,60 @@
+🚀 Starting Solana -> Movement E2E Test...
+Relayer (Taker): Crgx1n8HxZe8fq3d3vYhYrLDuKJ3pJZN4gfeSKuNarub
+User: E9GgemF9TcLobsLPJNUWdJsNtmDwDy9jgQnBXujoKMpA
+Secret: 0xb225e2cedaaa4dffe88624d4db4a74f30530b84ea793e0a970f48aa12618110a
+Hashlock: 0xab078dc3f5c8e6e1c219a207c7bdee6b65f85c970fc90d6fa898abcfffd91ff9
+Escrow PDA: GJF39VF89QtSEjQB4RyBH6DSfu6jrs52YqYpMD8gk5Lo
+Maker WSOL: AEgKQXyGK3zC92wHGaSSACTpY1thmSby3V6Sqbg892NW
+⚡ Initializing Escrow on Solana...
+❌ Solana Initialize Failed: SendTransactionError: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1. 
+Logs: 
+[
+  "Program log: Instruction: InitializeAccount3",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 3158 of 181898 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+  "Program log: Instruction: Transfer",
+  "Program log: Error: insufficient funds",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 175653 compute units",
+  "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+  "Program 5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N consumed 28649 of 200000 compute units",
+  "Program 5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async sendAndConfirmRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@coral-xyz/anchor/src/provider.ts:377:21)
+    at async AnchorProvider.sendAndConfirm (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@coral-xyz/anchor/src/provider.ts:163:14)
+    at async MethodsBuilder.rpc [as _rpcFn] (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@coral-xyz/anchor/src/program/namespace/rpc.ts:29:16)
+    at async main (/home/antony/intent-protocol/packages/cross-chain-relayer/scripts/e2e_solana_to_movement.ts:79:20) {
+  signature: '',
+  transactionMessage: 'Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1',
+  transactionLogs: [
+    'Program 5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N invoke [1]',
+    'Program log: Instruction: Initialize',
+    'Program 11111111111111111111111111111111 invoke [2]',
+    'Program 11111111111111111111111111111111 success',
+    'Program 11111111111111111111111111111111 invoke [2]',
+    'Program 11111111111111111111111111111111 success',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]',
+    'Program log: Instruction: InitializeAccount3',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 3158 of 181898 compute units',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]',
+    'Program log: Instruction: Transfer',
+    'Program log: Error: insufficient funds',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 4302 of 175653 compute units',
+    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1',
+    'Program 5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N consumed 28649 of 200000 compute units',
+    'Program 5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N failed: custom program error: 0x1'
+  ],
+  programErrorStack: ProgramErrorStack {
+    stack: [
+      [PublicKey [PublicKey(5nvKEjTpid3egnvQS4C2NvFk52Rh6Xu4cUxMMZbGPk4N)]],
+      [PublicKey [PublicKey(TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA)]]
+    ]
+  }
+}
+Script execution completed.
