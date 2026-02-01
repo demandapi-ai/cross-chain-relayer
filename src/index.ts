@@ -98,6 +98,23 @@ server.post('/reveal-secret', async (request, reply) => {
     }
 });
 
+// Request faucet drip
+server.post('/request-faucet', async (request, reply) => {
+    const body = request.body as any;
+
+    if (!body.chain || !body.address) {
+        return reply.code(400).send({ error: 'Missing chain or address' });
+    }
+
+    try {
+        const txHash = await relayer.handleFaucetRequest(body.chain, body.address);
+        return { success: true, txHash };
+    } catch (error: any) {
+        console.error(chalk.red('Faucet request failed:'), error.message);
+        return reply.code(500).send({ error: error.message });
+    }
+});
+
 // Start server
 const start = async () => {
     try {

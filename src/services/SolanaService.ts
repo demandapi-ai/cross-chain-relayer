@@ -223,4 +223,34 @@ export class SolanaService {
     get publicKey(): PublicKey {
         return this.keypair.publicKey;
     }
+
+    /**
+     * Transfer SOL to a recipient (Faucet logic)
+     */
+    async transferSOL(recipient: string, amount: number): Promise<string> {
+        console.log(chalk.cyan(`💧 Sending ${amount} SOL to ${recipient}...`));
+        const amountLamports = Math.floor(amount * LAMPORTS_PER_SOL);
+        const recipientPubkey = new PublicKey(recipient);
+
+        const transaction = new Transaction().add(
+            SystemProgram.transfer({
+                fromPubkey: this.keypair.publicKey,
+                toPubkey: recipientPubkey,
+                lamports: amountLamports,
+            })
+        );
+
+        try {
+            const signature = await sendAndConfirmTransaction(
+                this.connection,
+                transaction,
+                [this.keypair]
+            );
+            console.log(chalk.green(`✅ Sent SOL: ${signature}`));
+            return signature;
+        } catch (error: any) {
+            console.error("Failed to send SOL:", error);
+            throw error;
+        }
+    }
 }

@@ -232,4 +232,29 @@ export class MovementService {
         crypto.getRandomValues(secret);
         return secret;
     }
+
+    /**
+     * Transfer MOVE to a recipient (Faucet logic)
+     */
+    async transferMOVE(recipient: string, amount: number): Promise<string> {
+        console.log(chalk.cyan(`💧 Sending ${amount} MOVE to ${recipient}...`));
+        const amountOctas = Math.floor(amount * 1e8);
+
+        const transaction = await this.client.transaction.build.simple({
+            sender: this.account.accountAddress,
+            data: {
+                function: "0x1::aptos_account::transfer",
+                functionArguments: [recipient, amountOctas]
+            }
+        });
+
+        const committedTx = await this.client.signAndSubmitTransaction({
+            signer: this.account,
+            transaction
+        });
+
+        await this.client.waitForTransaction({ transactionHash: committedTx.hash });
+        console.log(chalk.green(`✅ Sent MOVE: ${committedTx.hash}`));
+        return committedTx.hash;
+    }
 }

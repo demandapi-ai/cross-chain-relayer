@@ -269,4 +269,22 @@ export class RelayerCore {
     getCompletedIntents(): CrossChainIntent[] {
         return this.completedIntents;
     }
+
+    /**
+     * Handle Faucet Request
+     */
+    async handleFaucetRequest(chain: 'solana' | 'movement', address: string) {
+        console.log(chalk.blue(`\n🚰 Processing Faucet Request for ${chain}`));
+        console.log(chalk.gray(`   Recipient: ${address}`));
+
+        if (chain === 'solana') {
+            const amount = 0.05; // Faucet amount in SOL
+            return await this.solanaService.transferSOL(address, amount);
+        } else if (chain === 'movement') {
+            const amount = 10.0; // Faucet amount in MOVE
+            return await this.movementService.transferMOVE(address, amount);
+        } else {
+            throw new Error(`Invalid chain: ${chain}`);
+        }
+    }
 }
