@@ -27,7 +27,7 @@ import chalk from 'chalk';
 
 dotenv.config();
 
-const WRAP_AMOUNT_SOL = 0.2; // Amount of SOL to wrap into WSOL
+const WRAP_AMOUNT_SOL = 2.0; // Amount of SOL to wrap into WSOL
 
 async function main() {
     console.log(chalk.cyan('🔄 Fund Relayer WSOL Script'));

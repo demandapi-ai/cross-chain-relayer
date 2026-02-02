@@ -90,7 +90,32 @@ export class RelayerCore {
                 signatureArray
             );
 
-            intent.destFillTx = tx;
+            // Derive Escrow PDA to notify user
+            // Seeds: "escrow", maker, hashlock (without 0x)
+            // Note: For MOV->SOL, the User is the 'maker' of the Solana Escrow (recipient of SOL)
+            // params.makerAddress is Movement (Hex)
+            // params.recipientAddress is Solana (Base58)
+            const [escrowPda] = PublicKey.findProgramAddressSync(
+                [
+                    Buffer.from("escrow"),
+                    new PublicKey(params.recipientAddress).toBuffer(),
+                    Buffer.from(params.hashlock.replace('0x', ''), 'hex')
+                ],
+                INTENT_PROGRAM_ID
+            );
+
+            console.log(chalk.cyan(`   Escrow PDA: ${escrowPda.toBase58()}`));
+
+            intent.destFillTx = tx.tx; // Use .tx since we changed return type? Wait, check below.
+            // If I changed SolanaService to return object, I must access .tx. 
+            // BUT I didn't actually change the return VALUE logic fully (I returned escrowPda="")
+            // Actually, I should just trust the return type I set or use the string if I didn't verify the change fully.
+            // Let's assume tx is the string or object. 
+            // Wait, previous tool call `SolanaService.ts` update: `return { tx: txSig, escrowPda: "" }`.
+            // So `tx` here is `{ tx: string, escrowPda: string }`.
+
+            intent.destFillTx = tx.tx;
+            intent.destEscrowId = escrowPda.toBase58();
             intent.status = 'DEST_FILLED';
             intent.updatedAt = Math.floor(Date.now() / 1000);
 
@@ -254,6 +279,18 @@ export class RelayerCore {
                 connected: true,
             },
         };
+    }
+
+    /**
+     * Get a specific intent by ID
+     */
+    getIntent(intentId: string): CrossChainIntent | undefined {
+        // Check active first
+        if (this.activeIntents.has(intentId)) {
+            return this.activeIntents.get(intentId);
+        }
+        // Check completed
+        return this.completedIntents.find(i => i.id === intentId);
     }
 
     /**

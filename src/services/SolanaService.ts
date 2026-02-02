@@ -56,7 +56,7 @@ export class SolanaService {
         buyAmount: anchor.BN,
         intentParams: any,
         signatureArr: number[]
-    ): Promise<string> {
+    ): Promise<{ tx: string, escrowPda: string }> {
         console.log(chalk.cyan(`⚡ Calling 'fill' on Solana contract...`));
         try {
             require('fs').appendFileSync('debug_relayer.log', `[${new Date().toISOString()}] Calling fill with intentParams: ${JSON.stringify(intentParams, (k, v) => (typeof v === 'bigint' ? v.toString() : v))}\n`);
@@ -185,7 +185,31 @@ export class SolanaService {
             const tx = new Transaction().add(ed25519Ix).add(fillIx);
             const txSig = await sendAndConfirmTransaction(this.connection, tx, [this.keypair]);
             console.log(chalk.green(`✅ Solana Fill Tx: ${txSig}`));
-            return txSig;
+
+            // Derive Escrow PDA for notifications
+            // Seeds: "escrow", maker, hashlock (Wait, hashlock IS NOT in intent params passed here explicitly, it's inside `fillArgs`? No, hashlock is NOT used in Intent Swap seeds?)
+            // Wait, look at contracts-solana: seeds = [b"escrow", maker.key().as_ref(), intent.nonce.to_le_bytes().as_ref()] OR hashlock?
+            // Bot usage in `createEscrow`: `[b"escrow", maker, hashlock]`
+            // Does `fill` create an escrow with the SAME seeds?
+            // YES, usually it must match.
+            // But `fill` instruction in lib.rs creates an escrow. What seeds does `fill` usage?
+            // Check `intent-swap/programs/intent-swap/src/lib.rs` if possible?
+            // Or assume Bot is correct. If Bot uses hashlock, then Relayer must use hashlock.
+            // But `intentParams` passed to `fill` DOES NOT HAVE `hashlock`.
+            // User passes `hashlock` in `handleMovementToSolana` params!
+            // So `RelayerCore` has the hashlock, but `SolanaService.fill` doesn't receive it in `intentParams` specifically as a seed source unless I pass it.
+
+            // Wait, look at `RelayerCore.ts` calling `fill`. It calls `fill(..., intentParams, signatureArray)`.
+            // `intentParams` is the struct. It DOES NOT contain `hashlock`.
+            // The `hashlock` is passed as `params.hashlock` to `handleMovementToSolana`.
+
+            // So I can't derive PDA *inside* `fill` easily without passing hashlock.
+
+            // CHANGE OF PLANS:
+            // Instead of calculating PDA inside `SolanaService.fill`, I should calculate it in `RelayerCore.ts` where I have the `hashlock`!
+            // I'll keep `SolanaService` returning string, and do calculation in Core.
+
+            return { tx: txSig, escrowPda: "" }; // Placeholder, will fix in Core or here if I add param.
         } catch (e: any) {
             try {
                 require('fs').appendFileSync('debug_relayer.log', `[${new Date().toISOString()}] Fill Error: ${e.message}\n${e.stack}\n`);

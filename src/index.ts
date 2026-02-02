@@ -26,6 +26,18 @@ server.get('/orders', async () => {
     };
 });
 
+// Get specific intent status
+server.get('/intents/:id', async (request, reply) => {
+    const { id } = request.params as { id: string };
+    const intent = relayer.getIntent(id);
+
+    if (!intent) {
+        return reply.code(404).send({ error: 'Intent not found' });
+    }
+
+    return { intent };
+});
+
 // Movement → Solana swap
 server.post('/swap/movement-to-solana', async (request, reply) => {
     const body = request.body as any;
