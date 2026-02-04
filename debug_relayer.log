@@ -728,3 +728,70 @@ Program 5JAWumq5L4B8WrpF3CFox36SZ2bJF4xQvskLksmHRgs2 failed: custom program erro
 [2026-02-01T10:43:56.827Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26ccc1","start_amount":"26ccc1","end_amount":"26ccc1","start_time":"697f2e2e","end_time":"697f3c7a","nonce":"019c18cd517d"}
 [2026-02-01T10:43:56.827Z] Signature len: 64
 [2026-02-01T10:43:56.827Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T22:51:29.757Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26a1c3","start_amount":"26a1c3","end_amount":"26a1c3","start_time":"697fd8b2","end_time":"697fe6fe","nonce":"019c1b6763d7"}
+[2026-02-01T22:51:29.775Z] Signature len: 64
+[2026-02-01T22:51:29.776Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T22:59:00.148Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26a041","start_amount":"26a041","end_amount":"26a041","start_time":"697fda75","end_time":"697fe8c1","nonce":"019c1b6e4407"}
+[2026-02-01T22:59:00.149Z] Signature len: 64
+[2026-02-01T22:59:00.149Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T22:59:52.038Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26bef8","start_amount":"26bef8","end_amount":"26bef8","start_time":"697fdaa8","end_time":"697fe8f4","nonce":"019c1b6f0e4d"}
+[2026-02-01T22:59:52.039Z] Signature len: 64
+[2026-02-01T22:59:52.039Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:01:10.165Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26bead","start_amount":"26bead","end_amount":"26bead","start_time":"697fdaf7","end_time":"697fe943","nonce":"019c1b703f60"}
+[2026-02-01T23:01:10.168Z] Signature len: 64
+[2026-02-01T23:01:10.168Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:04:25.647Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26cf14","start_amount":"26cf14","end_amount":"26cf14","start_time":"697fdbbb","end_time":"697fea07","nonce":"019c1b733d01"}
+[2026-02-01T23:04:25.648Z] Signature len: 64
+[2026-02-01T23:04:25.648Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:05:13.984Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26ebd9","start_amount":"26ebd9","end_amount":"26ebd9","start_time":"697fdbeb","end_time":"697fea37","nonce":"019c1b73f85a"}
+[2026-02-01T23:05:13.984Z] Signature len: 64
+[2026-02-01T23:05:13.984Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:13:13.565Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"2716c9","start_amount":"2716c9","end_amount":"2716c9","start_time":"697fddca","end_time":"697fec16","nonce":"019c1b7b49a1"}
+[2026-02-01T23:13:13.566Z] Signature len: 64
+[2026-02-01T23:13:13.567Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:13:14.809Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Connection.sendRawTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:6009:20)
+    at async Connection.sendTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/connection.ts:5997:12)
+    at async sendAndConfirmTransaction (/home/antony/intent-protocol/packages/cross-chain-relayer/node_modules/@solana/web3.js/src/utils/send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/SolanaService.ts:186:27)
+    at async RelayerCore.handleMovementToSolana (/home/antony/intent-protocol/packages/cross-chain-relayer/src/services/RelayerCore.ts:85:24)
+    at async Object.<anonymous> (/home/antony/intent-protocol/packages/cross-chain-relayer/src/index.ts:40:24)
+[2026-02-01T23:13:14.877Z] Logs: 
+[2026-02-01T23:15:36.190Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"270008","start_amount":"270008","end_amount":"270008","start_time":"697fde59","end_time":"697feca5","nonce":"019c1b7d7702"}
+[2026-02-01T23:15:36.192Z] Signature len: 64
+[2026-02-01T23:15:36.192Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:24:45.198Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"270439","start_amount":"270439","end_amount":"270439","start_time":"697fe07d","end_time":"697feec9","nonce":"019c1b85d62c"}
+[2026-02-01T23:24:45.221Z] Signature len: 64
+[2026-02-01T23:24:45.222Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:30:07.598Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26dcc8","start_amount":"26dcc8","end_amount":"26dcc8","start_time":"697fe1c0","end_time":"697ff00c","nonce":"019c1b8ac2ce"}
+[2026-02-01T23:30:07.598Z] Signature len: 64
+[2026-02-01T23:30:07.598Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:42:35.654Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"26db96","start_amount":"26db96","end_amount":"26db96","start_time":"697fe4ac","end_time":"697ff2f8","nonce":"019c1b962cd1"}
+[2026-02-01T23:42:35.666Z] Signature len: 64
+[2026-02-01T23:42:35.666Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:44:53.694Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"136445","start_amount":"136445","end_amount":"136445","start_time":"697fe536","end_time":"697ff382","nonce":"019c1b9847d6"}
+[2026-02-01T23:44:53.695Z] Signature len: 64
+[2026-02-01T23:44:53.695Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:47:09.565Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"136175","start_amount":"136175","end_amount":"136175","start_time":"697fe5be","end_time":"697ff40a","nonce":"019c1b9a5abf"}
+[2026-02-01T23:47:09.573Z] Signature len: 64
+[2026-02-01T23:47:09.573Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:48:11.822Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"07c257","start_amount":"07c257","end_amount":"07c257","start_time":"697fe5fd","end_time":"697ff449","nonce":"019c1b9b4fca"}
+[2026-02-01T23:48:11.822Z] Signature len: 64
+[2026-02-01T23:48:11.822Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-01T23:49:54.398Z] Calling fill with intentParams: {"maker":"21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"07c296","start_amount":"07c296","end_amount":"07c296","start_time":"697fe663","end_time":"697ff4af","nonce":"019c1b9cdeb7"}
+[2026-02-01T23:49:54.398Z] Signature len: 64
+[2026-02-01T23:49:54.398Z] Maker: 21PPrVWpzJwaNJF97jvn79b7owvfB1w2A4MfNyqxr15C
+[2026-02-04T08:05:17.247Z] Calling fill with intentParams: {"maker":"42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"081a38","start_amount":"081a38","end_amount":"081a38","start_time":"6982fd71","end_time":"69830bbd","nonce":"019c27aeeef9"}
+[2026-02-04T08:05:17.329Z] Signature len: 64
+[2026-02-04T08:05:17.329Z] Maker: 42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX
