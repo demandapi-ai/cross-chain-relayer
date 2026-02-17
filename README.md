@@ -2,6 +2,7 @@
 
 ## Overview
 The BCH-Solana Relayer enables atomic swaps between Bitcoin Cash (Chipnet) and Solana (Devnet). This verification guide explains how to run the relayer, deploy test HTLCs, and verify the services.
+**Repository**: [https://github.com/Intents-Swaps/bch-solana-relayer](https://github.com/Intents-Swaps/bch-solana-relayer)
 
 ## Prerequisites
 1. **Node.js**: Installed (v18+).
