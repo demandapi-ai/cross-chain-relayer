@@ -6,6 +6,9 @@ import { config } from '../config';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 
+// Fix for BN import in some environments
+const BN = (anchor as any).BN || (anchor as any).default?.BN;
+
 export class BCHSolanaRelayerCore {
     private bchService: BCHService;
     private solanaService: SolanaService;
@@ -155,8 +158,8 @@ export class BCHSolanaRelayerCore {
             const result = await this.solanaService.createEscrow(
                 new PublicKey(intent.recipientAddress), // User is recipient of SOL
                 hashBuf,
-                new anchor.BN(intent.buyAmount),
-                new anchor.BN(intent.destTimelock)
+                new BN(intent.buyAmount),
+                new BN(intent.destTimelock)
             );
 
             intent.destFillTx = result.tx;

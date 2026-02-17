@@ -31,18 +31,22 @@ export class BCHService {
     /**
      * Initialize wallet from file
      */
-    async initWallet() {
-        try {
-            const walletPath = path.resolve(config.bch.walletPath);
-            if (!fs.existsSync(walletPath)) {
-                throw new Error(`Wallet file not found at ${walletPath}`);
+    public async initWallet(wif?: string) {
+        if (this.wallet) return;
+
+        const key = wif || config.bch.privateKey;
+
+        if (key) {
+            try {
+                this.wallet = await TestNetWallet.fromWIF(key);
+                console.log(chalk.blue(`✅ BCH Service: Wallet initialized (${this.wallet.cashaddr})`));
+            } catch (e) {
+                console.log(chalk.yellow(`⚠️  BCH: Could not parse key. Using random.`));
+                this.wallet = await TestNetWallet.newRandom();
             }
-            const walletData = JSON.parse(fs.readFileSync(walletPath, 'utf8'));
-            this.wallet = await TestNetWallet.fromWIF(walletData.wif);
-            console.log(chalk.green(`✅ BCH Service: Wallet initialized (${this.wallet.cashaddr})`));
-        } catch (e: any) {
-            console.error(chalk.red('❌ Failed to init wallet:'), e.message);
-            throw e;
+        } else {
+            this.wallet = await TestNetWallet.newRandom();
+            console.log(chalk.blue(`✅ BCH Service: Generated random wallet (${this.wallet.cashaddr})`));
         }
     }
 

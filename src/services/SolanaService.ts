@@ -1,5 +1,5 @@
 import { Connection, Keypair, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, sendAndConfirmTransaction, Ed25519Program } from '@solana/web3.js';
-import { getAssociatedTokenAddress, getOrCreateAssociatedTokenAccount, NATIVE_MINT } from '@solana/spl-token';
+import { getAssociatedTokenAddress, getOrCreateAssociatedTokenAccount, NATIVE_MINT, createSyncNativeInstruction, createCloseAccountInstruction } from '@solana/spl-token';
 import * as anchor from '@coral-xyz/anchor';
 import { Program } from '@coral-xyz/anchor';
 import { createHash } from 'crypto';
@@ -23,13 +23,15 @@ export class SolanaService {
     private program: Program<any>;
     private provider: anchor.AnchorProvider;
 
-    constructor() {
+    constructor(privateKey?: string) {
         this.connection = new Connection(config.solana.rpcUrl, 'confirmed');
 
         // Initialize keypair
-        if (config.solana.privateKey) {
+        const key = privateKey || config.solana.privateKey;
+
+        if (key) {
             try {
-                const secretKey = Uint8Array.from(JSON.parse(config.solana.privateKey));
+                const secretKey = Uint8Array.from(JSON.parse(key));
                 this.keypair = Keypair.fromSecretKey(secretKey);
                 console.log(chalk.magenta('✅ Solana Service: Loaded Keypair'));
             } catch {
@@ -92,14 +94,23 @@ export class SolanaService {
         // Relayer's WSOL account (source of funds)
         const makerTokenAccount = await getAssociatedTokenAddress(NATIVE_MINT, this.keypair.publicKey);
 
-        // Ensure WSOL account exists and has funds? 
-        // We assume Relayer manages this. 
-        // For devnet, we might need to wrap SOL if using WSOL.
-        // ACTUALLY: The contract transfer instruction uses SPL Token transfer.
-        // So we MUST have WSOL.
+        // Ensure Relayer's WSOL account exists
+        await getOrCreateAssociatedTokenAccount(
+            this.connection,
+            this.keypair,
+            NATIVE_MINT,
+            this.keypair.publicKey
+        );
 
-        // Auto-wrap SOL if needed?
-        // Let's assume Relayer has WSOL.
+        // Prepare Wrapping Instructions
+        const wrapSOLIxs = [
+            SystemProgram.transfer({
+                fromPubkey: this.keypair.publicKey,
+                toPubkey: makerTokenAccount,
+                lamports: BigInt(amountLamports.toString())
+            }),
+            createSyncNativeInstruction(makerTokenAccount)
+        ];
 
         try {
             const program: any = this.program;
@@ -109,6 +120,7 @@ export class SolanaService {
                     timelock,
                     amountLamports
                 )
+                .preInstructions(wrapSOLIxs)
                 .accounts({
                     maker: this.keypair.publicKey,
                     taker: recipient, // User is taker
@@ -162,6 +174,14 @@ export class SolanaService {
         // Relayer is Taker (recipient of SOL)
         const takerTokenAccount = await getAssociatedTokenAddress(NATIVE_MINT, this.keypair.publicKey);
 
+        // Ensure Taker (Recipient) has WSOL account
+        await getOrCreateAssociatedTokenAccount(
+            this.connection,
+            this.keypair,
+            NATIVE_MINT,
+            this.keypair.publicKey
+        );
+
         try {
             const program: any = this.program;
             const tx = await program.methods
@@ -173,6 +193,13 @@ export class SolanaService {
                     takerTokenAccount: takerTokenAccount,
                     tokenProgram: anchor.utils.token.TOKEN_PROGRAM_ID
                 })
+                .postInstructions([
+                    createCloseAccountInstruction(
+                        takerTokenAccount, // Close this WSOL account
+                        this.keypair.publicKey, // Send rent/funds to Taker wallet
+                        this.keypair.publicKey // Owner
+                    )
+                ])
                 .rpc();
 
             console.log(chalk.green(`✅ Solana Escrow Claimed: ${tx}`));
