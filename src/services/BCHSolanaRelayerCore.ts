@@ -1,9 +1,9 @@
 import chalk from 'chalk';
-import { BCHService } from './BCHService';
-import { SolanaService } from './SolanaService';
-import { MovementService } from './MovementService';
-import { CrossChainIntent, IntentStatus } from '../types/intent';
-import { config } from '../config';
+import { BCHService } from './BCHService.js';
+import { SolanaService } from './SolanaService.js';
+import { MovementService } from './MovementService.js';
+import { CrossChainIntent, IntentStatus } from '../types/intent.js';
+import { config } from '../config.js';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 

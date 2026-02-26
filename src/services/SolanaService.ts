@@ -4,8 +4,8 @@ import * as anchor from '@coral-xyz/anchor';
 import { Program } from '@coral-xyz/anchor';
 import { createHash } from 'crypto';
 import chalk from 'chalk';
-import { config } from '../config';
-import idl from './intent_swap.json';
+import { config } from '../config.js';
+import idl from './intent_swap.json' with { type: 'json' };
 
 // Minimal IDL interface
 interface IntentSwap {

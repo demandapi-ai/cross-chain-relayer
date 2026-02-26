@@ -1,8 +1,8 @@
 import fastify from 'fastify';
 import cors from '@fastify/cors';
 import chalk from 'chalk';
-import { config } from './config';
-import { BCHSolanaRelayerCore } from './services/BCHSolanaRelayerCore';
+import { config } from './config.js';
+import { BCHSolanaRelayerCore } from './services/BCHSolanaRelayerCore.js';
 
 const server = fastify({ logger: false });
 server.register(cors, { origin: true });

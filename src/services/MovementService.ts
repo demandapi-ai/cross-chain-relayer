@@ -1,7 +1,7 @@
 import { Aptos, AptosConfig, Network, Ed25519PrivateKey, Account } from '@aptos-labs/ts-sdk';
 import { createHash } from 'crypto';
 import chalk from 'chalk';
-import { config, TOKENS } from '../config';
+import { config, TOKENS } from '../config.js';
 
 export interface ChainBalance {
     symbol: string;
