@@ -8,7 +8,7 @@ export const config = {
         privateKey: process.env.BCH_PRIVATE_KEY_WIF,
         walletPath: process.env.BCH_WALLET_PATH || '../contracts-bch-swap/wallet.json',
         // Contract Artifact Path
-        artifactPath: '../contracts-bch-crosschain/artifacts/CrossChainHTLC.json'
+        artifactPath: './src/artifacts/CrossChainHTLC.json'
     },
 
     // Solana (Devnet)

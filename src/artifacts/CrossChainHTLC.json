@@ -1,0 +1,91 @@
+{
+  "contractName": "CrossChainHTLC",
+  "constructorInputs": [
+    {
+      "name": "senderPkh",
+      "type": "bytes20"
+    },
+    {
+      "name": "recipientPkh",
+      "type": "bytes20"
+    },
+    {
+      "name": "secretHash",
+      "type": "bytes32"
+    },
+    {
+      "name": "timelock",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "claim",
+      "inputs": [
+        {
+          "name": "recipientPk",
+          "type": "pubkey"
+        },
+        {
+          "name": "recipientSig",
+          "type": "sig"
+        },
+        {
+          "name": "secret",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "name": "refund",
+      "inputs": [
+        {
+          "name": "senderPk",
+          "type": "pubkey"
+        },
+        {
+          "name": "senderSig",
+          "type": "sig"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_4 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_5 OP_PICK OP_HASH160 OP_ROT OP_EQUALVERIFY OP_2ROT OP_CHECKSIGVERIFY OP_4 OP_ROLL OP_SHA256 OP_ROT OP_EQUAL OP_NIP OP_NIP OP_NIP OP_ELSE OP_4 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_4 OP_PICK OP_HASH160 OP_EQUALVERIFY OP_4 OP_ROLL OP_4 OP_ROLL OP_CHECKSIGVERIFY OP_ROT OP_CHECKLOCKTIMEVERIFY OP_2DROP OP_DROP OP_1 OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\r\n\r\n// =============================================================================\r\n// CrossChainHTLC — Hash Time Locked Contract for BCH <-> Movement/Solana swaps\r\n// =============================================================================\r\n//\r\n// Mirrors the Movement `htlc_escrow.move` and Solana `intent-swap` HTLC logic.\r\n//\r\n// Flow (BCH as Source — user sells BCH):\r\n//   1. User generates secret S, computes H = sha256(S)\r\n//   2. User locks BCH/CashTokens in this covenant with H and a timelock\r\n//   3. Solver pays the user on the destination chain (Movement/Solana) using H\r\n//   4. User reveals S on the destination chain to claim\r\n//   5. Solver sees S on-chain and claims BCH from this covenant\r\n//   6. If solver doesn't claim before timelock, user refunds\r\n//\r\n// Flow (BCH as Target — solver pays in BCH):\r\n//   1. Intent created on source chain (Movement) with hash H\r\n//   2. Solver locks BCH in this covenant with H and a shorter timelock\r\n//   3. User reveals S to claim the BCH\r\n//   4. Solver uses S to claim on the source chain\r\n//   5. If user doesn't claim before timelock, solver refunds\r\n\r\ncontract CrossChainHTLC(\r\n    // Sender's public key hash (who locks the funds — could be user or solver)\r\n    bytes20 senderPkh,\r\n    // Recipient's public key hash (who can claim with the secret)\r\n    bytes20 recipientPkh,\r\n    // SHA-256 hash of the secret (32 bytes)\r\n    bytes32 secretHash,\r\n    // Unix timestamp when the HTLC expires\r\n    int timelock\r\n) {\r\n    // =========================================================================\r\n    // claim() — Recipient claims by revealing the preimage (secret)\r\n    // =========================================================================\r\n    function claim(pubkey recipientPk, sig recipientSig, bytes32 secret) {\r\n        // 1. Verify the recipient's identity\r\n        require(hash160(recipientPk) == recipientPkh);\r\n        require(checkSig(recipientSig, recipientPk));\r\n\r\n        // 2. Verify the secret matches the hash (HTLC core logic)\r\n        require(sha256(secret) == secretHash);\r\n\r\n        // Note: No covenant restrictions on outputs — recipient can send funds\r\n        // wherever they want. The secret reveal IS the proof of claim.\r\n        // The relayer watches for the secret in the spending transaction.\r\n    }\r\n\r\n    // =========================================================================\r\n    // refund() — Sender reclaims funds after the timelock expires\r\n    // =========================================================================\r\n    function refund(pubkey senderPk, sig senderSig) {\r\n        // 1. Verify the sender's identity\r\n        require(hash160(senderPk) == senderPkh);\r\n        require(checkSig(senderSig, senderPk));\r\n\r\n        // 2. Enforce that the timelock has passed\r\n        require(tx.time >= timelock);\r\n    }\r\n}\r\n",
+  "debug": {
+    "bytecode": "5479009c635579a97b8871ad547aa87b8777777767547a519d5479a988547a547aad7bb16d755168",
+    "sourceMap": "37:4:48:5;;;;;39:24:39:35;;:16::36:1;:40::52:0;:8::54:1;40:25:40:50:0;:8::53:1;43:23:43:29:0;;:16::30:1;:34::44:0;:8::46:1;37:4:48:5;;;;53::60::0;;;;55:24:55:32;;:16::33:1;:8::48;56:25:56:34:0;;:36::44;;:8::47:1;59:27:59:35:0;:8::37:1;53:4:60:5;;;24:0:61:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 13,
+        "line": 39
+      },
+      {
+        "ip": 15,
+        "line": 40
+      },
+      {
+        "ip": 21,
+        "line": 43
+      },
+      {
+        "ip": 32,
+        "line": 55
+      },
+      {
+        "ip": 37,
+        "line": 56
+      },
+      {
+        "ip": 39,
+        "line": 59
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.1"
+  },
+  "updatedAt": "2026-02-13T15:42:02.006Z"
+}
