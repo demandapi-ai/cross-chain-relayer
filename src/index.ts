@@ -20,6 +20,11 @@ server.get('/health', async () => {
         services: {
             bch: !!(relayer as any).bchService.wallet, // Quick check
             solana: true
+        },
+        pubkeys: {
+            bch: (relayer as any).bchService.wallet?.cashaddr || '',
+            solana: (relayer as any).solanaService.publicKey.toBase58(),
+            movement: (relayer as any).movementService.account?.accountAddress?.toString() || ''
         }
     };
 });
@@ -45,7 +50,7 @@ server.post('/swap/bch-to-solana', async (request, reply) => {
     const body = request.body as any;
     // Required: makerAddress, recipientAddress, sellAmount, buyAmount, hashlock, bchContractAddress
     try {
-        const intent = await relayer.handleBCHToSolana(body);
+        console.log("---- RECEIVING SWAP ----\\nBody Hashlock:", body.hashlock); const intent = await relayer.handleBCHToSolana(body); console.log("Intent Hashlock:", intent.hashlock);
         return { success: true, intent };
     } catch (e: any) {
         return reply.code(500).send({ error: e.message });
@@ -64,12 +69,60 @@ server.post('/swap/solana-to-bch', async (request, reply) => {
     }
 });
 
-// 6. Manual Secret Reveal (Optional, usually auto-detected)
-server.post('/reveal-secret', async (request, reply) => {
-    // In this architecture, we poll for secrets. 
-    // But helpful for debugging or forcing completion.
-    // TODO: Implement manual override if needed.
-    return { message: "Relayer polls for secrets automatically." };
+// 6. BCH -> Movement Swap
+server.post('/swap/bch-to-move', async (request, reply) => {
+    const body = request.body as any;
+    // Required: makerAddress, recipientAddress, sellAmount, buyAmount, hashlock, bchContractAddress
+    try {
+        const intent = await (relayer as any).handleBCHToMovement(body);
+        return { success: true, intent };
+    } catch (e: any) {
+        return reply.code(500).send({ error: e.message });
+    }
+});
+
+// 7. Movement -> BCH Swap
+server.post('/swap/move-to-bch', async (request, reply) => {
+    const body = request.body as any;
+    // Required: makerAddress, recipientAddress, sellAmount, buyAmount, hashlock, sourceEscrowId
+    try {
+        const intent = await (relayer as any).handleMovementToBCH(body);
+        return { success: true, intent };
+    } catch (e: any) {
+        return reply.code(500).send({ error: e.message });
+    }
+});
+
+// 8. Claim — User reveals secret to trigger claim flow
+server.post('/claim', async (request, reply) => {
+    const body = request.body as any;
+    const { intentId, secret } = body;
+    if (!intentId || !secret) {
+        return reply.code(400).send({ error: 'Missing intentId or secret' });
+    }
+
+    const intent = relayer.getIntent(intentId);
+    if (!intent) {
+        return reply.code(404).send({ error: 'Intent not found' });
+    }
+
+    try {
+        // Store the secret on the intent so the poll loop can complete the claim
+        console.log("---- RECEIVING CLAIM ----\\nIntent Hashlock: ", intent.hashlock, "\\nClaim Secret: ", secret); (intent as any).secret = secret;
+        console.log(chalk.cyan(`[Claim] Secret revealed for intent ${intentId}, triggering immediate processing`));
+
+        // Trigger poll immediately for faster UX
+        setTimeout(() => relayer.pollIntents(), 0);
+
+        return {
+            success: true,
+            message: 'Secret accepted. Claim will be processed automatically.',
+            intentId,
+            status: intent.status,
+        };
+    } catch (e: any) {
+        return reply.code(500).send({ error: e.message });
+    }
 });
 
 const start = async () => {

@@ -124,20 +124,6 @@ async function main() {
 
     try {
         // We know the secret!
-        const txId = await userBchService.claimHTLC(
-            (relayer as any).bchService.wallet.cashaddr, // Maker is Relayer
-            hashHex, // 0x or plain? contract expects plain hex usually? no, `lockBCH` took plain hex. `claimHTLC` takes plain hex.
-            secretHex,
-            BigInt(Math.floor(Date.now() / 1000) + 3600) // We guess the timelock Relayer used (config.dest)
-            // Wait, claimHTLC needs EXACT timelock to derive script?
-            // Yes, P2SH script creation depends on parameters.
-            // Relayer used: `now + config.timelocks.dest`.
-            // We can read it from intent?
-            // `updatedIntent.destTimelock`
-        );
-
-        // Wait, `claimHTLC` signature:
-        // makerAddress, hashlock, secret, timelock
 
         // We need the ACTUAL timelock used by Relayer.
         const finalIntent = relayer.getIntent(intent.id);

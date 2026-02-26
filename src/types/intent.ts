@@ -3,7 +3,7 @@ export interface CrossChainIntent {
     id: string;
 
     // Direction
-    direction: 'BCH_TO_SOL' | 'SOL_TO_BCH';
+    direction: 'BCH_TO_SOL' | 'SOL_TO_BCH' | 'BCH_TO_MOV' | 'MOV_TO_BCH' | 'MOV_TO_SOL' | 'SOL_TO_MOV';
 
     // Addresses
     makerAddress: string;      // User's address on source chain
@@ -11,6 +11,8 @@ export interface CrossChainIntent {
     recipientAddress: string;  // User's address on destination chain
 
     // Tokens/Amounts
+    sellToken?: string;
+    buyToken?: string;
     sellAmount: string;        // Amount user locks on source
     buyAmount: string;         // Amount user receives on dest
 
@@ -25,6 +27,8 @@ export interface CrossChainIntent {
     // Chain-Specific Identifiers
     bchContractAddress?: string;  // Address of the specific CrossChainHTLC covenant
     solanaEscrowPda?: string;     // PDA of the Solana escrow account
+    movementEscrowId?: string;    // ID of the Movement Escrow
+    sourceEscrowId?: string;
 
     // Transaction Hashes
     sourceLockTx?: string;     // User locks funds

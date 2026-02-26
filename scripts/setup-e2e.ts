@@ -5,6 +5,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import chalk from 'chalk';
 import { config } from '../src/config';
+import { MovementService } from '../src/services/MovementService';
+import { Ed25519PrivateKey, Account } from '@aptos-labs/ts-sdk';
 
 // Ensure .env is loaded
 import dotenv from 'dotenv';
@@ -31,9 +33,19 @@ async function main() {
         relayerSolKeypair = Keypair.generate();
     }
 
+    // Movement
+    let relayerMovAccount: Account;
+    if (process.env.MOVEMENT_PRIVATE_KEY) {
+        const privateKey = new Ed25519PrivateKey(process.env.MOVEMENT_PRIVATE_KEY);
+        relayerMovAccount = Account.fromPrivateKey({ privateKey });
+    } else {
+        relayerMovAccount = Account.generate();
+    }
+
     console.log(chalk.yellow('\n🤖 RELAYER WALLETS:'));
     console.log(`   BCH Address: ${relayerBchWallet.cashaddr}`);
     console.log(`   SOL Address: ${relayerSolKeypair.publicKey.toBase58()}`);
+    console.log(`   MOV Address: ${relayerMovAccount.accountAddress.toString()}`);
 
     // Print balances
     const bchBal = await relayerBchWallet.getBalance('sat');
@@ -85,11 +97,21 @@ async function main() {
         userKeys.solSecret = Array.from(userSolKeypair.secretKey);
     }
 
+    let userMovAccount: Account;
+    if (userKeys.movSecret) {
+        const privateKey = new Ed25519PrivateKey(userKeys.movSecret);
+        userMovAccount = Account.fromPrivateKey({ privateKey });
+    } else {
+        userMovAccount = Account.generate();
+        userKeys.movSecret = userMovAccount.privateKey.toString();
+    }
+
     // Save
     fs.writeFileSync(userKeyFile, JSON.stringify(userKeys, null, 2));
 
     console.log(`   BCH Address: ${userBchWallet.cashaddr}`);
     console.log(`   SOL Address: ${userSolKeypair.publicKey.toBase58()}`);
+    console.log(`   MOV Address: ${userMovAccount.accountAddress.toString()}`);
 
     // Check balances
     const userBchBal = await userBchWallet.getBalance('sat');
@@ -138,6 +160,10 @@ async function main() {
     if (!process.env.SOLANA_PRIVATE_KEY) {
         console.log(chalk.magenta('📝 Updating .env with Relayer SOL Key...'));
         fs.appendFileSync(ENV_FILE, `\nSOLANA_PRIVATE_KEY=${JSON.stringify(Array.from(relayerSolKeypair.secretKey))}`);
+    }
+    if (!process.env.MOVEMENT_PRIVATE_KEY) {
+        console.log(chalk.magenta('📝 Updating .env with Relayer MOV Key...'));
+        fs.appendFileSync(ENV_FILE, `\nMOVEMENT_PRIVATE_KEY=${relayerMovAccount.privateKey.toString()}`);
     }
 
     console.log(chalk.green('\n✅ Setup Complete! Ready for E2E Tests.'));

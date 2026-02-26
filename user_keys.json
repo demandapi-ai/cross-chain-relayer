@@ -65,5 +65,6 @@
     155,
     234,
     212
-  ]
+  ],
+  "movSecret": "ed25519-priv-0x53bf0f3a4d18a28fcc9bdbf903f67a5b697719bf69ed69d8d0e730f95ea838c8"
 }

@@ -67,9 +67,10 @@ export class SolanaService {
         recipient: PublicKey,
         hashlock: Buffer, // 32 bytes
         amountLamports: anchor.BN,
-        timelock: anchor.BN
+        timelock: anchor.BN,
+        tokenMint: PublicKey = NATIVE_MINT
     ): Promise<{ tx: string, escrowPda: string }> {
-        console.log(chalk.cyan(`⚡ Creating Solana Escrow...`));
+        console.log(chalk.cyan(`⚡ Creating Solana Escrow for Mint: ${tokenMint.toBase58()}...`));
 
         // Derive Escrow PDA
         // Seeds: "escrow", maker (Relayer), hashlock
@@ -91,26 +92,29 @@ export class SolanaService {
             this.program.programId
         );
 
-        // Relayer's WSOL account (source of funds)
-        const makerTokenAccount = await getAssociatedTokenAddress(NATIVE_MINT, this.keypair.publicKey);
+        // Relayer's Token account (source of funds)
+        const makerTokenAccount = await getAssociatedTokenAddress(tokenMint, this.keypair.publicKey);
 
-        // Ensure Relayer's WSOL account exists
+        // Ensure Relayer's Token account exists
         await getOrCreateAssociatedTokenAccount(
             this.connection,
             this.keypair,
-            NATIVE_MINT,
+            tokenMint,
             this.keypair.publicKey
         );
 
-        // Prepare Wrapping Instructions
-        const wrapSOLIxs = [
-            SystemProgram.transfer({
-                fromPubkey: this.keypair.publicKey,
-                toPubkey: makerTokenAccount,
-                lamports: BigInt(amountLamports.toString())
-            }),
-            createSyncNativeInstruction(makerTokenAccount)
-        ];
+        // Prepare Wrapping Instructions ONLY if Native Mint
+        const preIxs = [];
+        if (tokenMint.equals(NATIVE_MINT)) {
+            preIxs.push(
+                SystemProgram.transfer({
+                    fromPubkey: this.keypair.publicKey,
+                    toPubkey: makerTokenAccount,
+                    lamports: BigInt(amountLamports.toString())
+                })
+            );
+            preIxs.push(createSyncNativeInstruction(makerTokenAccount));
+        }
 
         try {
             const program: any = this.program;
@@ -120,11 +124,11 @@ export class SolanaService {
                     timelock,
                     amountLamports
                 )
-                .preInstructions(wrapSOLIxs)
+                .preInstructions(preIxs)
                 .accounts({
                     maker: this.keypair.publicKey,
                     taker: recipient, // User is taker
-                    tokenMint: NATIVE_MINT,
+                    tokenMint: tokenMint,
                     escrow: escrowPda,
                     makerTokenAccount: makerTokenAccount,
                     vault: vaultPda,
@@ -150,9 +154,10 @@ export class SolanaService {
         maker: PublicKey,       // User (who created the escrow)
         hashlock: Buffer,
         secret: Buffer,
-        escrowPda?: PublicKey   // Optional, derived if not provided
+        escrowPda?: PublicKey,   // Optional, derived if not provided
+        tokenMint: PublicKey = NATIVE_MINT
     ): Promise<string> {
-        console.log(chalk.cyan(`⚡ Claiming Solana Escrow...`));
+        console.log(chalk.cyan(`⚡ Claiming Solana Escrow for Mint: ${tokenMint.toBase58()}...`));
 
         // Derive if missing
         if (!escrowPda) {
@@ -171,20 +176,30 @@ export class SolanaService {
             this.program.programId
         );
 
-        // Relayer is Taker (recipient of SOL)
-        const takerTokenAccount = await getAssociatedTokenAddress(NATIVE_MINT, this.keypair.publicKey);
+        // Relayer is Taker (recipient of tokens)
+        const takerTokenAccount = await getAssociatedTokenAddress(tokenMint, this.keypair.publicKey);
 
-        // Ensure Taker (Recipient) has WSOL account
+        // Ensure Taker (Recipient) has Token account
         await getOrCreateAssociatedTokenAccount(
             this.connection,
             this.keypair,
-            NATIVE_MINT,
+            tokenMint,
             this.keypair.publicKey
         );
 
+        // Provide Post Instructions ONLY if Native Mint
+        const postIxs = [];
+        if (tokenMint.equals(NATIVE_MINT)) {
+            postIxs.push(createCloseAccountInstruction(
+                takerTokenAccount, // Close this WSOL account
+                this.keypair.publicKey, // Send rent/funds to Taker wallet
+                this.keypair.publicKey // Owner
+            ));
+        }
+
         try {
             const program: any = this.program;
-            const tx = await program.methods
+            const builder = program.methods
                 .claim([...secret])
                 .accounts({
                     taker: this.keypair.publicKey,
@@ -192,15 +207,13 @@ export class SolanaService {
                     vault: vaultPda,
                     takerTokenAccount: takerTokenAccount,
                     tokenProgram: anchor.utils.token.TOKEN_PROGRAM_ID
-                })
-                .postInstructions([
-                    createCloseAccountInstruction(
-                        takerTokenAccount, // Close this WSOL account
-                        this.keypair.publicKey, // Send rent/funds to Taker wallet
-                        this.keypair.publicKey // Owner
-                    )
-                ])
-                .rpc();
+                });
+
+            if (postIxs.length > 0) {
+                builder.postInstructions(postIxs);
+            }
+
+            const tx = await builder.rpc();
 
             console.log(chalk.green(`✅ Solana Escrow Claimed: ${tx}`));
             return tx;

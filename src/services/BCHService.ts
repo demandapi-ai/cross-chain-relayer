@@ -139,6 +139,15 @@ export class BCHService {
         const hashBuf = Buffer.from(hashlock.replace('0x', ''), 'hex');
         const secretBuf = Buffer.from(secret.replace('0x', ''), 'hex');
 
+        // Debug: Verify sha256(secret) matches hashlock
+        const { createHash } = await import('crypto');
+        const computedHash = createHash('sha256').update(secretBuf).digest('hex');
+        console.log(chalk.yellow(`   [DEBUG] Secret hex: ${secret}`));
+        console.log(chalk.yellow(`   [DEBUG] Secret buf length: ${secretBuf.length}`));
+        console.log(chalk.yellow(`   [DEBUG] Hashlock (from intent): ${hashlock}`));
+        console.log(chalk.yellow(`   [DEBUG] sha256(secret):         ${computedHash}`));
+        console.log(chalk.yellow(`   [DEBUG] Match: ${computedHash === hashlock.replace('0x', '')}`));
+
         const contract = this.getContract(
             makerPkh,
             takerPkh,
@@ -158,8 +167,9 @@ export class BCHService {
         console.log(chalk.blue(`   Found ${balance} satoshis in ${utxos.length} UTXOs`));
 
         // 3. Build Claim Transaction
-        const wif = await (this.wallet as any).exportPrivateKeyWif();
+        const wif = (this.wallet as any).privateKeyWif;
         const sigTemplate = new SignatureTemplate(wif);
+        const recipientPubKey = sigTemplate.getPublicKey();
 
         console.log(chalk.blue(`   Claiming...`));
 
@@ -169,7 +179,7 @@ export class BCHService {
         // Add inputs (all UTXOs)
         // Note: contract.unlock.claim returns an Unlocker
         const unlocker = contract.unlock.claim(
-            (this.wallet as any).getPublicKey(),
+            recipientPubKey,
             sigTemplate,
             secretBuf
         );
@@ -177,9 +187,14 @@ export class BCHService {
         builder.addInputs(utxos, unlocker);
 
         // Add output (send all to self minus fee)
+        const fee = 1000n;
+        const outputAmount = balance - fee;
+        if (outputAmount < 546n) {
+            throw new Error(`Output ${outputAmount} sats is below dust limit. Need more funds in HTLC.`);
+        }
         builder.addOutput({
             to: this.wallet.cashaddr,
-            amount: balance - 2000n
+            amount: outputAmount
         });
 
         const tx = await builder.send();
@@ -193,26 +208,25 @@ export class BCHService {
      */
     async extractSecret(txId: string): Promise<string | null> {
         try {
-            // Fix: Use getRawTransaction and mainnet-js or manual parsing
-            // Check if wallet provider has getTransaction (it usually does and returns decoded)
-            if (this.wallet && (this.wallet.provider as any).getTransaction) {
-                const tx: any = await (this.wallet.provider as any).getTransaction(txId);
-                // Loop inputs
-                for (const input of tx.inputs) {
-                    const scriptHex = input.scriptHex || input.bytecode;
-                    if (!scriptHex) continue;
-                    const matches = scriptHex.match(/20([0-9a-f]{64})/gi);
+            // Use Electrum provider to get raw tx
+            if (this.provider) {
+                const rawTx = await this.provider.getRawTransaction(txId);
+                if (rawTx) {
+                    // We parse the raw transaction hex for the secret.
+                    // The secret is 32 bytes (64 hex characters). 
+                    // In a P2SH/P2Scripthash unlock, it is pushed to the stack.
+                    // The push opcode for 32 bytes is 0x20.
+                    // We look for '20' followed by 64 hex characters.
+                    const matches = rawTx.match(/20([0-9a-f]{64})/gi);
                     if (matches) {
                         for (const match of matches) {
-                            return match.substring(2);
+                            return match.substring(2); // Remove the '20' prefix
                         }
                     }
                 }
-                return null;
             }
 
-            // Fallback to provider.getRawTransaction and manual decode (skip for now if wallet works)
-            console.warn("Wallet provider getTransaction not available, skipping secret extraction fallback");
+            console.warn(`Could not extract secret from tx ${txId}`);
             return null;
 
         } catch (e) {
