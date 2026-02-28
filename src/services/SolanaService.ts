@@ -18,8 +18,8 @@ interface IntentSwap {
  * Solana Service for cross-chain HTLC operations using Anchor
  */
 export class SolanaService {
-    private connection: Connection;
-    private keypair: Keypair;
+    public connection: Connection;
+    public keypair: Keypair;
     private program: Program<any>;
     private provider: anchor.AnchorProvider;
 
@@ -155,7 +155,8 @@ export class SolanaService {
         hashlock: Buffer,
         secret: Buffer,
         escrowPda?: PublicKey,   // Optional, derived if not provided
-        tokenMint: PublicKey = NATIVE_MINT
+        tokenMint: PublicKey = NATIVE_MINT,
+        taker?: PublicKey        // The intended recipient (defaults to relayer)
     ): Promise<string> {
         console.log(chalk.cyan(`⚡ Claiming Solana Escrow for Mint: ${tokenMint.toBase58()}...`));
 
@@ -176,24 +177,27 @@ export class SolanaService {
             this.program.programId
         );
 
-        // Relayer is Taker (recipient of tokens)
-        const takerTokenAccount = await getAssociatedTokenAddress(tokenMint, this.keypair.publicKey);
+        const actualTaker = taker || this.keypair.publicKey;
 
-        // Ensure Taker (Recipient) has Token account
+        // Relayer/User is Taker (recipient of tokens)
+        const takerTokenAccount = await getAssociatedTokenAddress(tokenMint, actualTaker);
+
+        // Ensure Taker (Recipient) has Token account (fee paid by relayer)
         await getOrCreateAssociatedTokenAccount(
             this.connection,
-            this.keypair,
+            this.keypair, // Payer
             tokenMint,
-            this.keypair.publicKey
+            actualTaker,  // Owner
+            true          // allowOwnerOffCurve
         );
 
         // Provide Post Instructions ONLY if Native Mint
         const postIxs = [];
         if (tokenMint.equals(NATIVE_MINT)) {
             postIxs.push(createCloseAccountInstruction(
-                takerTokenAccount, // Close this WSOL account
-                this.keypair.publicKey, // Send rent/funds to Taker wallet
-                this.keypair.publicKey // Owner
+                takerTokenAccount,  // Close this WSOL account
+                actualTaker,        // Send rent/funds to Taker wallet
+                actualTaker         // Owner
             ));
         }
 
@@ -202,7 +206,7 @@ export class SolanaService {
             const builder = program.methods
                 .claim([...secret])
                 .accounts({
-                    taker: this.keypair.publicKey,
+                    taker: actualTaker,
                     escrow: escrowPda,
                     vault: vaultPda,
                     takerTokenAccount: takerTokenAccount,
@@ -274,25 +278,19 @@ export class SolanaService {
 
                         // Hack: Decode manually or try-catch.
                         try {
-                            // "claim" is likely the 2nd instruction or based on IDL.
-                            // Let's decode entire Ix if possible.
-                            // `this.program.coder.instruction.decode(ix.data, 'base58')`
-
                             const ixData = (ix as any).data; // base58 string 
                             const ixBuf = Buffer.from(anchor.utils.bytes.bs58.decode(ixData));
 
-                            // Discriminator provided by IDL
-                            // claim discriminator: ...
+                            // "claim" discriminator is SHA256("global:claim")[0..8] -> 3ec6d6c1d59f6cd2
+                            const claimDiscriminator = Buffer.from('3ec6d6c1d59f6cd2', 'hex');
 
-                            // Let's rely on finding 32 bytes that hash to our hashlock?
-                            // We don't have hashlock here easily unless passed.
-                            // But we can just return candidates.
-
-                            if (ixBuf.length >= 40) { // 8 disc + 32 secret
+                            if (ixBuf.length >= 40 && ixBuf.slice(0, 8).equals(claimDiscriminator)) { // 8 disc + 32 secret
                                 const secretCandidate = ixBuf.slice(8, 40);
                                 return secretCandidate.toString('hex');
                             }
-                        } catch (e) { }
+                        } catch (e) {
+                            // Ignore decoding errors for other instructions
+                        }
                     }
                 }
             }

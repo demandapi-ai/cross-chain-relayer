@@ -128,14 +128,15 @@ export class BCHService {
         userAddress: string,    // The Maker (Sender)
         hashlock: string,       // Hex string
         secret: string,         // Hex string (preimage)
-        timelock: bigint
+        timelock: bigint,
+        expectedAddress?: string // The contract address the user deposited to
     ): Promise<string> {
         if (!this.wallet) throw new Error("Wallet not initialized");
 
         // 1. Reconstruct contract parameters to find address
         // In BCH->SOL flow, User is Sender (Maker), Relayer is Recipient (Taker)
         const makerPkh = this.derivePkh(userAddress);
-        const takerPkh = await this.getWalletPkh();
+        const relayerPkh = await this.getWalletPkh();
         const hashBuf = Buffer.from(hashlock.replace('0x', ''), 'hex');
         const secretBuf = Buffer.from(secret.replace('0x', ''), 'hex');
 
@@ -148,12 +149,24 @@ export class BCHService {
         console.log(chalk.yellow(`   [DEBUG] sha256(secret):         ${computedHash}`));
         console.log(chalk.yellow(`   [DEBUG] Match: ${computedHash === hashlock.replace('0x', '')}`));
 
-        const contract = this.getContract(
-            makerPkh,
-            takerPkh,
-            hashBuf,
-            timelock
-        );
+        // Try with Relayer as Taker
+        let contract = this.getContract(makerPkh, relayerPkh, hashBuf, timelock);
+        let activeTakerPkh = relayerPkh;
+
+        if (expectedAddress && contract.address !== expectedAddress) {
+            console.log(chalk.yellow(`   [DEBUG] Contract address mismatch. Expected ${expectedAddress}, got ${contract.address}`));
+            console.log(chalk.yellow(`   [DEBUG] Attempting fallback: User might have used their own address as recipient (frontend fallback)...`));
+
+            // Try with User as Taker
+            const fallbackContract = this.getContract(makerPkh, makerPkh, hashBuf, timelock);
+            if (fallbackContract.address === expectedAddress) {
+                console.log(chalk.yellow(`   [DEBUG] Fallback match! Using User as Taker.`));
+                contract = fallbackContract;
+                activeTakerPkh = makerPkh;
+            } else {
+                throw new Error(`Could not reconstruct HTLC for address ${expectedAddress}. Check timelock, hashlock, or PKHs.`);
+            }
+        }
 
         // 2. Get UTXOs
         console.log(chalk.blue(`   Checking HTLC address ${contract.address}...`));

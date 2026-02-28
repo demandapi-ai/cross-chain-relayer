@@ -195,40 +195,51 @@ export class MovementService {
 
     /**
      * Get relayer balances
-     */
     async getBalances(): Promise<ChainBalance[]> {
         const balances: ChainBalance[] = [];
 
-        try {
-            const resources = await this.client.getAccountResources({
-                accountAddress: this.account.accountAddress
-            });
-
-            // MOVE balance
-            const moveCoinStore = resources.find(
-                (r: any) => r.type === `0x1::coin::CoinStore<${TOKENS.movement.MOVE}>`
-            );
-            if (moveCoinStore) {
-                balances.push({
-                    symbol: 'MOVE',
-                    balance: parseInt((moveCoinStore.data as any).coin.value) / 1e8,
-                    decimals: 8,
+        // Add simple retry logic for NGHTTP2_REFUSED_STREAM and other network flakes
+        let retries = 3;
+        while (retries > 0) {
+            try {
+                const resources = await this.client.getAccountResources({
+                    accountAddress: this.account.accountAddress
                 });
-            }
 
-            // USDC balance
-            const usdcCoinStore = resources.find(
-                (r: any) => r.type === `0x1::coin::CoinStore<${TOKENS.movement.USDC}>`
-            );
-            if (usdcCoinStore) {
-                balances.push({
-                    symbol: 'USDC',
-                    balance: parseInt((usdcCoinStore.data as any).coin.value) / 1e6,
-                    decimals: 6,
-                });
+                // MOVE balance
+                const moveCoinStore = resources.find(
+                    (r: any) => r.type === `0x1::coin::CoinStore<${TOKENS.movement.MOVE}>`
+                );
+                if (moveCoinStore) {
+                    balances.push({
+                        symbol: 'MOVE',
+                        balance: parseInt((moveCoinStore.data as any).coin.value) / 1e8,
+                        decimals: 8,
+                    });
+                }
+
+                // USDC balance
+                const usdcCoinStore = resources.find(
+                    (r: any) => r.type === `0x1::coin::CoinStore<${TOKENS.movement.USDC}>`
+                );
+                if (usdcCoinStore) {
+                    balances.push({
+                        symbol: 'USDC',
+                        balance: parseInt((usdcCoinStore.data as any).coin.value) / 1e6,
+                        decimals: 6,
+                    });
+                }
+                
+                // Success, exit retry loop
+                break;
+            } catch (e: any) {
+                retries--;
+                if (retries === 0) {
+                    console.error('Failed to get Movement balances after retries:', e.message);
+                } else {
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1s before retry
+                }
             }
-        } catch (e) {
-            console.error('Failed to get Movement balances:', e);
         }
 
         return balances;
