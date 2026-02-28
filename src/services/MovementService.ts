@@ -44,21 +44,20 @@ export class MovementService {
         console.log(chalk.gray(`   Amount: ${amount}`));
         console.log(chalk.gray(`   Timelock: ${timelockDuration}s`));
 
-        // Get next escrow ID
-        let nextEscrowId = 0;
+        // Get predicted escrow ID BEFORE transaction (same approach as frontend)
+        let predictedEscrowId = 0;
         try {
             const registryStats = await this.client.view({
                 payload: {
                     function: `${this.htlcAddress}::htlc_escrow::get_registry_stats`,
-                    typeArguments: ["0x1::aptos_coin::AptosCoin"], // Simplify: assumme MOVE for registry stats
+                    typeArguments: ["0x1::aptos_coin::AptosCoin"],
                     functionArguments: [this.htlcAddress]
                 }
             });
-            // registryStats returns [next_escrow_id, total_locked, total_claimed, total_refunded]
-            nextEscrowId = parseInt(registryStats[0] as string);
-            console.log(chalk.blue(`   Next Escrow ID to be assigned: ${nextEscrowId}`));
-        } catch (e) {
-            console.error(chalk.red('Failed to fetch registry stats:'), e);
+            predictedEscrowId = parseInt(registryStats[0] as string);
+            console.log(chalk.cyan(`   Predicted Escrow ID: ${predictedEscrowId}`));
+        } catch (e: any) {
+            console.warn(chalk.yellow(`⚠️ Could not get registry stats: ${e.message}`));
         }
 
         const transaction = await this.client.transaction.build.simple({
@@ -84,9 +83,22 @@ export class MovementService {
 
         const executedTx = await this.client.waitForTransaction({ transactionHash: committedTx.hash });
 
-        console.log(chalk.green(`✅ Movement HTLC Created: ${committedTx.hash}`));
+        // Try to parse Event for Escrow ID (in case contract is updated)
+        let escrowId = predictedEscrowId;
+        if ('events' in executedTx) {
+            const events = executedTx.events;
+            const escrowEvent = events.find((e: any) => e.type.includes("::htlc_escrow::NewEscrowEvent"));
+            if (escrowEvent && escrowEvent.data?.escrow_id !== undefined) {
+                escrowId = Number(escrowEvent.data.escrow_id);
+                console.log(chalk.green(`✅ Event Parsed: Escrow ID ${escrowId}`));
+            } else {
+                console.log(chalk.cyan(`   Using predicted Escrow ID: ${escrowId}`));
+            }
+        }
 
-        return { txHash: committedTx.hash, escrowId: nextEscrowId };
+        console.log(chalk.green(`✅ Movement HTLC Created: ${committedTx.hash} (ID: ${escrowId})`));
+
+        return { txHash: committedTx.hash, escrowId };
     }
 
     /**

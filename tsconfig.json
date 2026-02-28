@@ -6,17 +6,19 @@
             "ES2022"
         ],
         "outDir": "./dist",
-        "rootDir": ".",
+        "rootDir": "./src",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
         "declaration": true
     },
     "include": [
-        "src/**/*",
-        "scripts/**/*"
+        "src/**/*"
     ],
     "exclude": [
         "node_modules",

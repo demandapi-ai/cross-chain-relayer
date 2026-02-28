@@ -795,3 +795,67 @@ Catch the `SendTransactionError` and call `getLogs()` on it for full details.
 [2026-02-04T08:05:17.247Z] Calling fill with intentParams: {"maker":"42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"081a38","start_amount":"081a38","end_amount":"081a38","start_time":"6982fd71","end_time":"69830bbd","nonce":"019c27aeeef9"}
 [2026-02-04T08:05:17.329Z] Signature len: 64
 [2026-02-04T08:05:17.329Z] Maker: 42Fmtx9q7o8HtWrrw7wqxK4hChNKYKeaAeAhammxucBX
+[2026-02-04T20:00:37.518Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"084d00","start_amount":"084d00","end_amount":"084d00","start_time":"6983a518","end_time":"6983b364","nonce":"019c2a3dd14b"}
+[2026-02-04T20:00:37.565Z] Signature len: 64
+[2026-02-04T20:00:37.566Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T20:03:44.739Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"084d00","start_amount":"084d00","end_amount":"084d00","start_time":"6983a5e0","end_time":"6983b42c","nonce":"019c2a40e09e"}
+[2026-02-04T20:03:44.740Z] Signature len: 64
+[2026-02-04T20:03:44.741Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T20:04:24.596Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"0850e8","start_amount":"0850e8","end_amount":"0850e8","start_time":"6983a605","end_time":"6983b451","nonce":"019c2a41710f"}
+[2026-02-04T20:04:24.598Z] Signature len: 64
+[2026-02-04T20:04:24.598Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T20:05:11.139Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"0850e8","start_amount":"0850e8","end_amount":"0850e8","start_time":"6983a636","end_time":"6983b482","nonce":"019c2a422e47"}
+[2026-02-04T20:05:11.139Z] Signature len: 64
+[2026-02-04T20:05:11.140Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T20:32:00.524Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"086858","start_amount":"086858","end_amount":"086858","start_time":"6983ac76","end_time":"6983bac2","nonce":"019c2a5a979f"}
+[2026-02-04T20:32:00.569Z] Signature len: 64
+[2026-02-04T20:32:00.570Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T20:50:57.537Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"086088","start_amount":"086088","end_amount":"086088","start_time":"6983b0e6","end_time":"6983bf32","nonce":"019c2a6befa1"}
+[2026-02-04T20:50:57.589Z] Signature len: 64
+[2026-02-04T20:50:57.590Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:00:02.195Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"0854d0","start_amount":"0854d0","end_amount":"0854d0","start_time":"6983b312","end_time":"6983c15e","nonce":"019c2a746ad1"}
+[2026-02-04T21:00:02.197Z] Signature len: 64
+[2026-02-04T21:00:02.198Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:02:08.370Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"14f348","start_amount":"14f348","end_amount":"14f348","start_time":"6983b390","end_time":"6983c1dc","nonce":"019c2a7658b4"}
+[2026-02-04T21:02:08.371Z] Signature len: 64
+[2026-02-04T21:02:08.371Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:08:06.219Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"086088","start_amount":"086088","end_amount":"086088","start_time":"6983b4f6","end_time":"6983c342","nonce":"019c2a7bce9f"}
+[2026-02-04T21:08:06.220Z] Signature len: 64
+[2026-02-04T21:08:06.221Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:18:00.605Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"5c21f0","start_amount":"5c21f0","end_amount":"5c21f0","start_time":"6983b749","end_time":"6983c595","nonce":"019c2a84e196"}
+[2026-02-04T21:18:00.606Z] Signature len: 64
+[2026-02-04T21:18:00.607Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:30:47.015Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"5c8b68","start_amount":"5c8b68","end_amount":"5c8b68","start_time":"6983ba47","end_time":"6983c893","nonce":"019c2a909343"}
+[2026-02-04T21:30:47.016Z] Signature len: 64
+[2026-02-04T21:30:47.017Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-04T21:42:47.720Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"5c6c28","start_amount":"5c6c28","end_amount":"5c6c28","start_time":"6983bd08","end_time":"6983cb54","nonce":"019c2a9b5453"}
+[2026-02-04T21:42:47.736Z] Signature len: 64
+[2026-02-04T21:42:47.737Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-05T08:43:03.448Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"e11900","start_amount":"e11900","end_amount":"e11900","start_time":"698457c7","end_time":"69846613","nonce":"019c2cf7ce08"}
+[2026-02-05T08:43:03.486Z] Signature len: 64
+[2026-02-05T08:43:03.487Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-07T08:39:16.298Z] Calling fill with intentParams: {"maker":"DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"081a38","start_amount":"081a38","end_amount":"081a38","start_time":"6986f9e1","end_time":"6987082d","nonce":"019c374103bd"}
+[2026-02-07T08:39:16.333Z] Signature len: 64
+[2026-02-07T08:39:16.334Z] Maker: DgTCv5xGiNicVtyzob6xtLkhjTfnmfVy23rP9ND94dGC
+[2026-02-23T08:58:52.044Z] Calling fill with intentParams: {"maker":"Ah375LzwRvffLosZXWJtsK5hgt4AnsQ2hvtnCePR9ZsP","sell_token":"11111111111111111111111111111111","buy_token":"11111111111111111111111111111111","sell_amount":"05f5e100","start_amount":"05f5e100","end_amount":"05f5e100","start_time":"699c16cb","end_time":"699c24db","nonce":"019c89b90cb6"}
+[2026-02-23T08:58:52.053Z] Signature len: 64
+[2026-02-23T08:58:52.054Z] Maker: Ah375LzwRvffLosZXWJtsK5hgt4AnsQ2hvtnCePR9ZsP
+[2026-02-23T08:58:56.486Z] Fill Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x2. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+    at Connection.sendEncodedTransaction (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\node_modules\@solana\web3.js\src\connection.ts:6053:13)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Connection.sendRawTransaction (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\node_modules\@solana\web3.js\src\connection.ts:6009:20)
+    at async Connection.sendTransaction (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\node_modules\@solana\web3.js\src\connection.ts:5997:12)
+    at async sendAndConfirmTransaction (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\node_modules\@solana\web3.js\src\utils\send-and-confirm-transaction.ts:36:21)
+    at async SolanaService.fill (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\src\services\SolanaService.ts:186:27)
+    at async RelayerCore.handleMovementToSolana (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\src\services\RelayerCore.ts:85:24)
+    at async Object.<anonymous> (c:\Users\Antony Dev\Desktop\Movement\movedapp\ubuntu\Intent-protocol\cross-chain-relayer\src\index.ts:52:24)
+[2026-02-23T08:58:56.544Z] Logs: 

@@ -228,8 +228,14 @@ export class RelayerCore {
                     console.error(chalk.red(`❌ Failed to claim on Solana: ${err.message}`));
                 }
 
+                // Debug logging for escrow ID
+                const escrowIdToUse = parseInt(intent.sourceEscrowId || '0');
+                console.log(chalk.cyan(`🔍 [DEBUG] Intent sourceEscrowId raw: ${intent.sourceEscrowId}`));
+                console.log(chalk.cyan(`🔍 [DEBUG] Claiming Movement Escrow ID: ${escrowIdToUse}`));
+                console.log(chalk.cyan(`🔍 [DEBUG] Secret (first 16 chars): ${secret.substring(0, 16)}...`));
+
                 const txHash = await this.movementService.claim(
-                    parseInt(intent.sourceEscrowId || '0'),
+                    escrowIdToUse,
                     secretBytes
                 );
                 intent.sourceClaimTx = txHash;
